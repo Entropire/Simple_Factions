@@ -1,5 +1,11 @@
 # Simple Factions
 
+## Credits
+
+This project includes code from AnvilGUI, © WesJD, licensed under the MIT License.
+
+## Information
+
 this is a small plugin in development. 
 
 if you have ideas of what I can add to this plugin to make it better I would appreciate it if you would send a message in the ideas chat.
