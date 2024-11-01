@@ -1,38 +1,57 @@
-# Simple Factions
+<div id="toc" align="center">
+  <ul style="list-style: none">
+    <summary>
+      <h1>Simple-Factions</h1>
+    </summary>
+  </ul>
+</div>
 
-## Credits
+---
+> [!WARNING]
+> This plugin is still in developemt. If you find a bug or feature that can be impoved you can open a issue for it.
 
-This project includes code from AnvilGUI, © WesJD, licensed under the MIT License.
+> [!NOTE]  
+> This code base uses the conventions stated [here](https://github.com/Entropire/Conventions).
 
-## Information
+> [!NOTE]
+> This project includes code from AnvilGUI, © WesJD, licensed under the MIT License.
 
-this is a small plugin in development. 
+## Description
 
-if you have ideas of what I can add to this plugin to make it better I would appreciate it if you would send a message in the ideas chat.
-
-if there is a bug or something not working properly with this plugin I would also appreciate if you leave a message in the bugs chat.
-
-### function 
-
-- team system 
-
-### commands
-
-- /faction create [faction name]
-- /faction delete [faction name]
-- /faction owner
-- /faction owner [faction name]
-- /faction members 
-- /faction members [faction name]
-- /faction invite [player name]
-- /faction leave 
-- /faction kick [player name]
-- /faction list
-- /faction modify name [new faction name]
-- /faction modify color [Minecraft colors]
-- /faction modify owner [new owner]
-- /chat public 
-- /chat faction
-           
+This is a small factions plugin in development for Minecraft. With this plugin you can create a faction and invite your friend to it. When you have created a faction it wil be displayed in your name, tab list and in the chat.
 
 
+## Features
+
+### Faction system
+This system makes it posible to create, modify, delete factions and also invite and kick player from your faction. 
+
+![faction system image](./Images/FactionSystem.png)
+
+### Chat system
+When you are in a faction you can make use of the custom chat system. With this chat you can communicate with other player in your faction with out other peaple seeing it.
+
+![Chat system image](./Images/ChatSystem.png)
+
+## License
+> MIT License
+> 
+> Copyright (c) 2024 Entropire
+> 
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+> of this software and associated documentation files (the "Software"), to deal
+> in the Software without restriction, including without limitation the rights
+> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> copies of the Software, and to permit persons to whom the Software is
+> furnished to do so, subject to the following conditions:
+> 
+> The above copyright notice and this permission notice shall be included in all
+> copies or substantial portions of the Software.
+> 
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+> SOFTWARE.
