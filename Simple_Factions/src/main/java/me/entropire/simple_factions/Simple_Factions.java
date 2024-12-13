@@ -36,8 +36,10 @@ public final class Simple_Factions extends JavaPlugin
         this.getServer().getPluginManager().registerEvents(new Message(this), this);
         this.getServer().getPluginManager().registerEvents(new OnInventoryClick(), this);
         getCommand("faction").setExecutor(new FactionCommand(this));
+        getCommand("f").setExecutor(new FactionCommand(this));
         getCommand("chat").setExecutor(new chatCommands(this));
         getCommand("faction").setTabCompleter(new FactionCommand(this));
+        getCommand("f").setTabCompleter(new FactionCommand(this));
         getCommand("chat").setTabCompleter(new chatCommands(this));
 
 

@@ -42,7 +42,7 @@ public class FactionDatabase
 
     public void addFaction(Faction faction) throws SQLException
     {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Factions (name, color, owner, members) VALUES (?, ?, ?, ?)"))
+        try (PreparedStatement preparedStatement = connection.prepareStatement("U INTO Factions (name, color, owner, members) VALUES (?, ?, ?, ?)"))
         {
             preparedStatement.setString(1, faction.getName());
             preparedStatement.setString(2, colors.getColorNameWithChatColor(faction.getColor()));

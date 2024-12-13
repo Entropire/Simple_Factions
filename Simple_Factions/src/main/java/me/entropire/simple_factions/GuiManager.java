@@ -37,9 +37,12 @@ public class GuiManager
                 });
 
         gui.addButton(15, "Join faction", Material.NAME_TAG, "Join a faction.", (btn, event) -> {
-            try {
+            try
+            {
                 FactionList((Player)event.getView().getPlayer(), 0);
-            } catch (SQLException e) {
+            }
+            catch (SQLException e)
+            {
                 throw new RuntimeException(e);
             }
         });
@@ -211,6 +214,7 @@ public class GuiManager
             gui.addButton(21, "Create", Material.GREEN_WOOL, "Create your new faction.", (btn, event) -> {
                 try {
                     factionManager.create((Player)event.getView().getPlayer());
+                    player.closeInventory();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }

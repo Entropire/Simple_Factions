@@ -7,6 +7,6 @@ description: A simple faction plugin.
 
 commands:
   faction:
-
+  f:
   chat:
     description: Change the chat you type in
