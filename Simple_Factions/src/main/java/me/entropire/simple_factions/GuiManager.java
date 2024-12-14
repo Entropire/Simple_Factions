@@ -34,21 +34,15 @@ public class GuiManager
                     CreateFaction((Player)event.getView().getPlayer());
                 });
 
-        gui.addButton(15, "Join faction", Material.NAME_TAG, "Join a faction.", (btn, event) -> {
-            try
-            {
-                FactionList((Player)event.getView().getPlayer(), 0);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
+        gui.addButton(15, "Join faction", Material.NAME_TAG, "Join a faction.", (btn, event) ->
+
+            FactionList((Player)event.getView().getPlayer(), 0)
+        );
 
         player.openInventory(gui.Create());
     }
 
-    public void FactionList(Player player, int pageNumber) throws SQLException
+    public void FactionList(Player player, int pageNumber)
     {
         Gui gui = new Gui("Faction page " + pageNumber, 54);
         ArrayList<String> factions = simpleFactionsPlugin.factionDatabase.getFactions();
@@ -58,13 +52,9 @@ public class GuiManager
             int index = 0;
             for(int i = 45 * pageNumber, j = Math.min(45 * (pageNumber + 1), factions.size()); i < j; i++)
             {
-                gui.addButton(index, factions.get(i), Material.PLAYER_HEAD, "", (btn, event) -> {
-                    try {
-                        FactionInfo((Player)event.getView().getPlayer() , btn.getItemMeta().getDisplayName());
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+                gui.addButton(index, factions.get(i), Material.PLAYER_HEAD, "", (btn, event) ->
+                    FactionInfo((Player)event.getView().getPlayer() , btn.getItemMeta().getDisplayName())
+                );
                 index++;
             }
         }
@@ -76,11 +66,8 @@ public class GuiManager
             gui.addButton(53, "Next", Material.STONE_BUTTON, "Go to the next page.", (btn, event) -> {
                 String inventoryName = event.getView().getTitle().replace("Factions page ", "");
                 int eventPageNumber = Integer.parseInt(inventoryName) + 1;
-                try {
-                    FactionList((Player) event.getView().getPlayer(), eventPageNumber);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+
+                FactionList((Player) event.getView().getPlayer(), eventPageNumber);
             });
         }
         else
@@ -93,11 +80,8 @@ public class GuiManager
             gui.addButton(45, "Previous", Material.STONE_BUTTON, "Go to the previous page.", (btn, event) -> {
                 String inventoryName = event.getView().getTitle().replace("Factions page ", "");
                 int eventPageNumber = Integer.parseInt(inventoryName) - 1;
-                try {
-                    FactionList((Player) event.getView().getPlayer(), eventPageNumber);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+
+                FactionList((Player) event.getView().getPlayer(), eventPageNumber);
             });
         }
         else
@@ -105,9 +89,9 @@ public class GuiManager
             gui.addButton(45, "", Material.GRAY_STAINED_GLASS_PANE, "", null);
         }
 
-        gui.addButton(49, "Leave", Material.RED_WOOL, "Go back to the main menu.", (btn, event) -> {
-            SimpleFaction((Player)event.getView().getPlayer());
-        });
+        gui.addButton(49, "Leave", Material.RED_WOOL, "Go back to the main menu.", (btn, event) ->
+            SimpleFaction((Player)event.getView().getPlayer())
+        );
 
         gui.addButton(46, "", Material.GRAY_STAINED_GLASS_PANE, "", null);
         gui.addButton(47, "", Material.GRAY_STAINED_GLASS_PANE, "", null);
@@ -119,7 +103,7 @@ public class GuiManager
         player.openInventory(gui.Create());
     }
 
-    public void FactionInfo(Player player, String factionName) throws SQLException
+    public void FactionInfo(Player player, String factionName)
     {
         Gui gui = new Gui("Info of " + factionName, 27);
 
@@ -151,22 +135,12 @@ public class GuiManager
         gui.addButton(6, "Faction members", Material.OAK_SIGN, top10Members, null);
         gui.addButton(21, "Join", Material.GREEN_WOOL, "Request to join this faction.", (btn, event) -> {
             String EventFactionName = event.getView().getTitle().replace("Info of ", "");
-            try
-            {
-                factionManager.join((Player)event.getView().getPlayer(), EventFactionName);
-            } catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
+            factionManager.join((Player)event.getView().getPlayer(), EventFactionName);
         });
 
-        gui.addButton(23, "Leave", Material.RED_WOOL, "Go back to the previous page.", (btn, event) -> {
-            try {
-                FactionList((Player)event.getView().getPlayer(), 0);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        gui.addButton(23, "Leave", Material.RED_WOOL, "Go back to the previous page.", (btn, event) ->
+            FactionList((Player)event.getView().getPlayer(), 0)
+        );
 
         player.openInventory(gui.Create());
     }
@@ -196,12 +170,12 @@ public class GuiManager
             factionColor = faction.getColor();
         }
 
-        gui.addButton(2, "Faction name", Material.NAME_TAG, factionName, (btn, event) -> {
-            SetFactionName((Player)event.getView().getPlayer());
-        });
-        gui.addButton(6, "Faction color", colors.getMaterialWithChatColor(factionColor), factionColor + colors.getColorNameWithChatColor(factionColor), (btn, event) -> {
-            SetFactionColor((Player)event.getView().getPlayer());
-        });
+        gui.addButton(2, "Faction name", Material.NAME_TAG, factionName, (btn, event) ->
+            SetFactionName((Player)event.getView().getPlayer())
+        );
+        gui.addButton(6, "Faction color", colors.getMaterialWithChatColor(factionColor), factionColor + colors.getColorNameWithChatColor(factionColor), (btn, event) ->
+            SetFactionColor((Player)event.getView().getPlayer())
+        );
         gui.addButton(23, "Discard", Material.RED_WOOL, "Discard your faction creation.", (btn, event) -> {
             factionManager.DeleteFactionCreation((Player)event.getView().getPlayer());
             event.getView().getPlayer().closeInventory();
@@ -210,12 +184,8 @@ public class GuiManager
         if(!factionName.contains("New Faction"))
         {
             gui.addButton(21, "Create", Material.GREEN_WOOL, "Create your new faction.", (btn, event) -> {
-                try {
-                    factionManager.create((Player)event.getView().getPlayer());
-                    player.closeInventory();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                factionManager.create((Player)event.getView().getPlayer());
+                player.closeInventory();
             });
         }
 
@@ -267,20 +237,24 @@ public class GuiManager
         player.openInventory(gui.Create());
     }
 
-    public void Faction(Player player, Faction faction) throws SQLException {
+    public void Faction(Player player, Faction faction)
+    {
         Gui gui = new Gui(faction.getName(), 27);
 
-        gui.addButton(10, "Faction name", Material.NAME_TAG, faction.getName(), (btn, event) -> {
-            ChangeFactionName((Player)event.getView().getPlayer());
-        });
-        gui.addButton(12, "Faction color", colors.getMaterialWithChatColor(faction.getColor()), faction.getColor() + colors.getColorNameWithChatColor(faction.getColor()), (btn, event) -> {
-            ChangeFactionColor((Player)event.getView().getPlayer());
-        });
+        gui.addButton(10, "Faction name", Material.NAME_TAG, faction.getName(), (btn, event) ->
+            ChangeFactionName((Player)event.getView().getPlayer())
+        );
+        gui.addButton(12, "Faction color", colors.getMaterialWithChatColor(faction.getColor()), faction.getColor() + colors.getColorNameWithChatColor(faction.getColor()), (btn, event) ->
+            ChangeFactionColor((Player)event.getView().getPlayer())
+        );
+
         gui.addButton(14, "Owner", Material.PLAYER_HEAD, simpleFactionsPlugin.playerDatabase.getPlayerName(faction.getOwner().toString()), null);
         ArrayList<String> members = new ArrayList<>();
-        for (int i = 0; i < Math.min(9, faction.getMembers().size()); i++) {
+        for (int i = 0; i < Math.min(9, faction.getMembers().size()); i++)
+        {
             members.add(faction.getMembers().get(i));
         }
+
         gui.addButton(16, "Members", Material.OAK_SIGN, members, null);
         if(faction.getOwner().equals(player.getUniqueId()))
         {
@@ -303,18 +277,11 @@ public class GuiManager
                         return Collections.emptyList();
                     }
                     Faction faction;
-                    try {
-                        int factionId = simpleFactionsPlugin.playerDatabase.getFactionId(player);
-                        faction  = simpleFactionsPlugin.factionDatabase.getFactionDataById(factionId);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
 
-                    try {
-                        factionManager.modifyName(player, faction.getName());
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                    int factionId = simpleFactionsPlugin.playerDatabase.getFactionId(player);
+                    faction  = simpleFactionsPlugin.factionDatabase.getFactionDataById(factionId);
+
+                    factionManager.modifyName(player, faction.getName());
 
                     return Arrays.asList(AnvilGUI.ResponseAction.close());
                 })
@@ -334,16 +301,13 @@ public class GuiManager
         {
             gui.addButton(slots.get(i),colors.getChatColorWithColorName(colorName) + colorName, colors.getMaterialWithColorName(colorName), "", (btn, event) -> {
                 String eventColorName  = btn.getItemMeta().getDisplayName();
-
                 Faction faction;
-                try {
-                    factionManager.modifyColor((Player)event.getView().getPlayer(), ChatColor.stripColor(eventColorName));
-                    int factionId = simpleFactionsPlugin.playerDatabase.getFactionId((Player)event.getView().getPlayer());
-                    faction  = simpleFactionsPlugin.factionDatabase.getFactionDataById(factionId);
-                    Faction((Player)event.getView().getPlayer(), faction);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+
+                factionManager.modifyColor((Player)event.getView().getPlayer(), ChatColor.stripColor(eventColorName));
+                int factionId = simpleFactionsPlugin.playerDatabase.getFactionId((Player)event.getView().getPlayer());
+                faction  = simpleFactionsPlugin.factionDatabase.getFactionDataById(factionId);
+                Faction((Player)event.getView().getPlayer(), faction);
+
             });
             i++;
         }

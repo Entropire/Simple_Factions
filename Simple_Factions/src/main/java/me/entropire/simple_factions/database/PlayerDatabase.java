@@ -1,5 +1,7 @@
 package me.entropire.simple_factions.database;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
@@ -7,12 +9,13 @@ import java.util.UUID;
 
 public class PlayerDatabase
 {
-    private final Connection connection;
-    public PlayerDatabase(String path) throws SQLException
-    {
-        connection = DriverManager.getConnection("jdbc:sqlite:" + path);
+    private DataBaseContext dataBaseContext;
 
-        try (Statement statement = connection.createStatement())
+    public PlayerDatabase(DataBaseContext dataBaseContext)
+    {
+        this.dataBaseContext = dataBaseContext;
+
+        try (Connection connection = dataBaseContext.CreateConnection(); Statement statement = connection.createStatement())
         {
             statement.execute("""
             CREATE TABLE IF NOT EXISTS Players (
@@ -23,40 +26,45 @@ public class PlayerDatabase
             )
             """);
         }
-    }
-
-    public void closeConnection() throws SQLException
-    {
-        if(connection != null && !connection.isClosed())
+        catch (Exception e)
         {
-            connection.close();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to create/load players table in database: " + e.getMessage());
         }
     }
 
-    public void addPlayer(Player player) throws SQLException
+    public void addPlayer(Player player)
     {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Players (uuid, name) VALUES (?, ?)"))
+        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Players (uuid, name) VALUES (?, ?)"))
         {
             preparedStatement.setString(1, player.getUniqueId().toString());
             preparedStatement.setString(2, player.getName());
             preparedStatement.execute();
         }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to add player to players table: " + e.getMessage());
+        }
     }
 
-    public boolean playerExists(String playerName) throws SQLException
+    public boolean playerExists(String playerName)
     {
-        try(PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Players WHERE name = ?"))
+        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Players WHERE name = ?"))
         {
             preparedStatement.setString(1, playerName);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next();
         }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to get player out of players table with player name: " + e.getMessage());
+        }
+        return false;
     }
 
-    public int getFactionId(Player player) throws SQLException
+    public int getFactionId(Player player)
     {
         int factionId = -1;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT factionId FROM Players WHERE uuid = ?"))
+        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT factionId FROM Players WHERE uuid = ?"))
         {
             preparedStatement.setString(1, player.getUniqueId().toString());
             try (ResultSet resultSet = preparedStatement.executeQuery())
@@ -67,33 +75,45 @@ public class PlayerDatabase
                 }
             }
         }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to get factionId out of players table: " + e.getMessage());
+        }
         return factionId;
     }
 
-    public void updateFactionWithPlayerUUID(UUID uuid, int factionId)throws SQLException
+    public void updateFactionWithPlayerUUID(UUID uuid, int factionId)
     {
-        try(PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Players SET factionId = ? WHERE uuid = ?"))
+        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Players SET factionId = ? WHERE uuid = ?"))
         {
             preparedStatement.setString(1, String.valueOf(factionId));
             preparedStatement.setString(2, uuid.toString());
             preparedStatement.executeUpdate();
         }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to update factionId in players table with playerUUID" + e.getMessage());
+        }
     }
 
-    public void updateFactionWithPlayerName(String name, int factionId)throws SQLException
+    public void updateFactionWithPlayerName(String name, int factionId)
     {
-        try(PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Players SET factionId = ? WHERE name = ?"))
+        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Players SET factionId = ? WHERE name = ?"))
         {
             preparedStatement.setString(1, String.valueOf(factionId));
             preparedStatement.setString(2, name);
             preparedStatement.executeUpdate();
         }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to update factionId in players table with playerName: " + e.getMessage());
+        }
     }
 
-    public boolean hasFaction(Player player) throws SQLException
+    public boolean hasFaction(Player player)
     {
         boolean hasFaction = false;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT factionId FROM Players WHERE uuid = ?"))
+        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT factionId FROM Players WHERE uuid = ?"))
         {
             preparedStatement.setString(1, player.getUniqueId().toString());
             try (ResultSet resultSet = preparedStatement.executeQuery())
@@ -108,12 +128,16 @@ public class PlayerDatabase
                 }
             }
         }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed check if players has a faction in players table: " + e.getMessage());
+        }
         return hasFaction;
     }
 
-    public UUID getPlayerUUID(String playerName) throws SQLException
+    public UUID getPlayerUUID(String playerName)
     {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT uuid FROM Players WHERE name = ?"))
+        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT uuid FROM Players WHERE name = ?"))
         {
             preparedStatement.setString(1, playerName);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -122,48 +146,63 @@ public class PlayerDatabase
             {
                 return UUID.fromString(resultSet.getString("uuid"));
             }
-            else
-            {
-                return null;
-            }
         }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to get playerUUID out of players table: " + e.getMessage());
+        }
+        return null;
     }
 
-    public String getPlayerName(String uuid) throws SQLException
+    public String getPlayerName(String uuid)
     {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT name FROM Players WHERE uuid = ?")) {
+        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT name FROM Players WHERE uuid = ?"))
+        {
             preparedStatement.setString(1, uuid);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
+            if (resultSet.next())
+            {
                 return resultSet.getString("name");
-            } else {
-                return null;
             }
         }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to get player name out of players table: " + e.getMessage());
+        }
+        return null;
     }
 
-    public String getChat(UUID uuid)throws SQLException
+    public String getChat(UUID uuid)
     {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT chat FROM Players WHERE uuid = ?")) {
+        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT chat FROM Players WHERE uuid = ?"))
+        {
             preparedStatement.setString(1, uuid.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
+            if (resultSet.next())
+            {
                 return resultSet.getString("chat");
-            } else {
-                return null;
             }
         }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to get player chat out of players table: " + e.getMessage());
+        }
+        return null;
     }
 
-    public void setChat(UUID uuid, String chat)throws SQLException
+    public void setChat(UUID uuid, String chat)
     {
-        try(PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Players SET chat = ? WHERE uuid = ?"))
+        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Players SET chat = ? WHERE uuid = ?"))
         {
             preparedStatement.setString(1, chat);
             preparedStatement.setString(2, uuid.toString());
             preparedStatement.executeUpdate();
+        }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to set player chat in players table: " + e.getMessage());
         }
     }
 }

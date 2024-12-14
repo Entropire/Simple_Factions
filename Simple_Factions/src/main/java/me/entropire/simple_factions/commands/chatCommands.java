@@ -18,8 +18,8 @@ import static org.bukkit.ChatColor.RED;
 
 public class chatCommands implements CommandExecutor, TabCompleter
 {
-
     private final Simple_Factions simpleFactionsPlugin;
+    ArrayList<String> chats = new ArrayList<>(Arrays.asList("public", "faction"));
 
     public chatCommands(Simple_Factions simpleFactionsPlugin)
     {
@@ -27,34 +27,27 @@ public class chatCommands implements CommandExecutor, TabCompleter
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args)
+    {
         if (!(sender instanceof Player player))
         {
             sender.sendMessage(RED + "Only players can use this command.");
             return false;
         }
 
-        ArrayList<String> chats = new ArrayList<>(Arrays.asList("public", "faction"));
         if(args.length < 1 || !chats.contains(args[0].toLowerCase()))
         {
             player.sendMessage("command usage: /chat [public or faction]");
             return false;
         }
-        try {
-            if(!simpleFactionsPlugin.playerDatabase.hasFaction(player))
-            {
-                player.sendMessage(RED + "You must be in a faction to change chat.");
-                return false;
-            }
-            simpleFactionsPlugin.playerDatabase.setChat(player.getUniqueId(), args[0].toLowerCase());
-            player.sendMessage(GREEN + "Set chat to " + args[0]);
-        }
-        catch (SQLException ex)
+
+        if(!simpleFactionsPlugin.playerDatabase.hasFaction(player))
         {
-            ex.printStackTrace();
-            Bukkit.getServer().getConsoleSender().sendMessage(RED + "Somthing went rong while change chat" + ex.getMessage());
-            player.sendMessage(RED + "Somthing went rong while change chat");
+            player.sendMessage(RED + "You must be in a faction to change chat.");
+            return false;
         }
+        simpleFactionsPlugin.playerDatabase.setChat(player.getUniqueId(), args[0].toLowerCase());
+        player.sendMessage(GREEN + "Set chat to " + args[0]);
 
         return false;
     }

@@ -1,9 +1,9 @@
-package me.entropire.simple_factions.objects;
+package me.entropire.simple_factions.Gui;
 
-import me.entropire.simple_factions.Gui.Button;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 @FunctionalInterface
-public interface ButtonPressAction {
+public interface ButtonPressAction
+{
     void onPress(Button button, InventoryClickEvent event);
 }

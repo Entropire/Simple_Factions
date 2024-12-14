@@ -41,16 +41,12 @@ public class FactionCommand implements CommandExecutor, TabCompleter
 
         if(args.length == 0)
         {
-            try {
-                if(simpleFactionsPlugin.playerDatabase.hasFaction(player))
-                {
-                    int factionId = simpleFactionsPlugin.playerDatabase.getFactionId(player);
-                    Faction faction = simpleFactionsPlugin.factionDatabase.getFactionDataById(factionId);
-                    gui.Faction(player, faction);
-                    return true;
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            if(simpleFactionsPlugin.playerDatabase.hasFaction(player))
+            {
+                int factionId = simpleFactionsPlugin.playerDatabase.getFactionId(player);
+                Faction faction = simpleFactionsPlugin.factionDatabase.getFactionDataById(factionId);
+                gui.Faction(player, faction);
+                return true;
             }
 
             if(simpleFactionsPlugin.createFactions.containsKey(player.getUniqueId()))
@@ -133,14 +129,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        try
-        {
-            factionManager.create(player, args[1]);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while making the faction.");
-        }
+        factionManager.create(player, args[1]);
     }
 
     private void handleNowCommand(String[] args, Player player) //may be removed in the released version
@@ -151,39 +140,19 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        try
-        {
-            for(int i = 0; i < Integer.parseInt(args[1]); i++){
-                factionManager.create(UUID.randomUUID(), "#$#$#$#$#$#$#$#$GHGHGHGHGHGHGH#$#$#$#$#$$#$#" + i);
-            }
-        } catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while making the faction.");
+        for(int i = 0; i < Integer.parseInt(args[1]); i++){
+            factionManager.create(UUID.randomUUID(), "#$#$#$#$#$#$#$#$GHGHGHGHGHGHGH#$#$#$#$#$$#$#" + i);
         }
     }
 
     private void handleDeleteCommand(Player player)
     {
-        try
-        {
-            factionManager.delete(player);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while deleting your faction.");
-        }
+        factionManager.delete(player);
     }
 
     private void handleListCommand(Player player)
     {
-        try
-        {
-            factionManager.list(player);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Somthing went wrong while getting every existing faction name.");
-        }
+        factionManager.list(player);
     }
 
     private void handleMembersCommand(String[] args, Player player)
@@ -191,14 +160,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
         String factionName = null;
         if(args.length > 1) factionName = args[1];
 
-        try
-        {
-            factionManager.members(player, factionName);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while listing member of faction.");
-        }
+        factionManager.members(player, factionName);
     }
 
     private void  handleOwnerCommand(String[] args, Player player)
@@ -206,26 +168,12 @@ public class FactionCommand implements CommandExecutor, TabCompleter
         String factionName = null;
         if(args.length > 1) factionName = args[1];
 
-        try
-        {
-            factionManager.owner(player, factionName);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while getting the owner of the faction.");
-        }
+        factionManager.owner(player, factionName);
     }
 
     private void handleLeaveCommand(Player player)
     {
-        try
-        {
-            factionManager.leave(player);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while getting the owner of the faction.");
-        }
+        factionManager.leave(player);
     }
 
     private void handleKickCommand(String[] args, Player player)
@@ -235,15 +183,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        try
-        {
-            factionManager.kick(player, args[1]);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong kicking a player from the faction.");
-
-        }
+        factionManager.kick(player, args[1]);
     }
 
     private void handleInviteCommand(String[] args, Player player)
@@ -254,14 +194,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        try
-        {
-            factionManager.invite(player, args[1]);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while create the invite.");
-        }
+        factionManager.invite(player, args[1]);
     }
 
     private void handleJoinCommand(String[] args, Player player)
@@ -271,38 +204,17 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        try
-        {
-            factionManager.join(player, args[1]);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while making a join request.");
-        }
+        factionManager.join(player, args[1]);
     }
 
     private void handleAcceptCommand(Player player)
     {
-        try
-        {
-            factionManager.accept(player);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while accepting a invite or join request.");
-        }
+        factionManager.accept(player);
     }
 
     private void handleDeclineCommand(Player player)
     {
-        try
-        {
-            factionManager.decline(player);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while declining a invite or join request.");
-        }
+        factionManager.decline(player);
     }
 
     private void handleModifyCommand(String[] args, Player player){
@@ -342,14 +254,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        try
-        {
-            factionManager.modifyName(player, args[2]);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while modifying the faction name.");
-        }
+        factionManager.modifyName(player, args[2]);
     }
 
     private void handleModifyColorCommand(String[] args, Player player)
@@ -360,14 +265,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        try
-        {
-            factionManager.modifyColor(player, args[2]);
-        }
-        catch (SQLException ex)
-        {
-            handleException(ex, player, "Something went wrong while modifying the faction color.");
-        }
+        factionManager.modifyColor(player, args[2]);
     }
 
     private void handleModifyOwnerCommand(String[] args, Player player)
@@ -377,13 +275,8 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             player.sendMessage(ChatColor.RED + "/faction modify owner [member name]");
             return;
         }
-        try
-        {
-            factionManager.modifyOwner(player, args[2]);
-        } catch (SQLException ex)
-        {
-            handleException(ex, player, "Somthing went wrong while modifying the factions owner.");
-        }
+
+        factionManager.modifyOwner(player, args[2]);
     }
 
     private void handleException(Exception ex, Player player, String message)

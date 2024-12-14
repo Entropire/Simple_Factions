@@ -8,17 +8,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
 import static org.bukkit.ChatColor.*;
 
-
 public class FactionManager
 {
     private final Colors colors = new Colors();
-
     private final Simple_Factions simpleFactionsPlugin;
 
     public FactionManager(Simple_Factions simpleFactionsPlugin)
@@ -26,7 +23,7 @@ public class FactionManager
         this.simpleFactionsPlugin = simpleFactionsPlugin;
     }
 
-    public void create(Player player, String factionName) throws SQLException
+    public void create(Player player, String factionName)
     {
         if(simpleFactionsPlugin.playerDatabase.hasFaction(player))
         {
@@ -51,7 +48,7 @@ public class FactionManager
         player.sendMessage(GREEN + "New faction " + factionName + " created.");
     }
 
-    public void create(Player player) throws SQLException
+    public void create(Player player)
     {
         Faction faction = simpleFactionsPlugin.createFactions.get(player.getUniqueId());
 
@@ -65,7 +62,7 @@ public class FactionManager
         player.sendMessage(GREEN + "New faction " + faction.getName() + " created.");
     }
 
-    public void create(UUID player, String factionName) throws SQLException //may be removed in the released version
+    public void create(UUID player, String factionName)//may be removed in the released version
     {
         ArrayList<String> members = new ArrayList<>();
         members.add(player.toString());
@@ -75,7 +72,7 @@ public class FactionManager
         simpleFactionsPlugin.playerDatabase.updateFactionWithPlayerName(player.toString(), simpleFactionsPlugin.factionDatabase.getFactionDataByName(factionName).getId());
     }
 
-    public void delete(Player player) throws SQLException
+    public void delete(Player player)
     {
         if(!simpleFactionsPlugin.playerDatabase.hasFaction(player))
         {
@@ -115,7 +112,7 @@ public class FactionManager
         player.sendMessage(RED + "You have delete your faction " + faction.getName());
     }
 
-    public void list(Player player) throws SQLException
+    public void list(Player player)
     {
         ArrayList<String> factionsNames = simpleFactionsPlugin.factionDatabase.getFactions();
         player.sendMessage("Factions: ");
@@ -125,7 +122,7 @@ public class FactionManager
         }
     }
 
-    public void members(Player player, String factionName) throws SQLException
+    public void members(Player player, String factionName)
     {
         ArrayList<String> members;
         if(factionName == null)
@@ -158,7 +155,7 @@ public class FactionManager
         }
     }
 
-    public void owner(Player player, String factionName) throws SQLException
+    public void owner(Player player, String factionName)
     {
         Faction faction;
         if(factionName == null)
@@ -190,7 +187,7 @@ public class FactionManager
     }
 
 
-    public void leave(Player player) throws SQLException
+    public void leave(Player player)
     {
         if(!simpleFactionsPlugin.playerDatabase.hasFaction(player))
         {
@@ -213,7 +210,7 @@ public class FactionManager
         player.sendMessage(GREEN + "You left the faction: " + factionData.getName());
     }
 
-    public void kick(Player player, String playerName) throws SQLException
+    public void kick(Player player, String playerName)
     {
         if(!simpleFactionsPlugin.playerDatabase.hasFaction(player))
         {
@@ -251,7 +248,7 @@ public class FactionManager
         }
     }
 
-    public void invite(Player player, String invitedPlayerName) throws SQLException
+    public void invite(Player player, String invitedPlayerName)
     {
         if(!simpleFactionsPlugin.playerDatabase.hasFaction(player))
         {
@@ -293,7 +290,7 @@ public class FactionManager
         player.sendMessage(GREEN + "Invited " + invitedPlayerName + " to your faction.");
     }
 
-    public void join(Player player, String factionName) throws SQLException
+    public void join(Player player, String factionName)
     {
         if(simpleFactionsPlugin.playerDatabase.hasFaction(player))
         {
@@ -320,7 +317,7 @@ public class FactionManager
         receiver.sendMessage("to decline type: /faction decline");
     }
 
-    public void accept(Player player) throws SQLException
+    public void accept(Player player)
     {
         if (simpleFactionsPlugin.invites.containsKey(player.getUniqueId()))
         {
@@ -358,7 +355,7 @@ public class FactionManager
         player.sendMessage(RED  + "You don't have any pending invites or requests." );
     }
 
-    public void decline(Player player) throws SQLException
+    public void decline(Player player)
     {
         if (simpleFactionsPlugin.invites.containsKey(player.getUniqueId()))
         {
@@ -389,7 +386,7 @@ public class FactionManager
         player.sendMessage(RED  + "You don't have any pending invites or requests." );
     }
 
-    public void modifyName(Player player, String newFactionName) throws SQLException
+    public void modifyName(Player player, String newFactionName)
     {
         if (!simpleFactionsPlugin.playerDatabase.hasFaction(player)) {
             player.sendMessage(RED + "You must be in a faction to modify it.");
@@ -423,7 +420,7 @@ public class FactionManager
         }
     }
 
-    public void modifyColor(Player player, String newColor) throws SQLException
+    public void modifyColor(Player player, String newColor)
     {
         if (!simpleFactionsPlugin.playerDatabase.hasFaction(player))
         {
@@ -464,7 +461,7 @@ public class FactionManager
         }
     }
 
-    public void modifyOwner(Player player, String newOwnerName) throws SQLException
+    public void modifyOwner(Player player, String newOwnerName)
     {
         if (!simpleFactionsPlugin.playerDatabase.hasFaction(player))
         {
