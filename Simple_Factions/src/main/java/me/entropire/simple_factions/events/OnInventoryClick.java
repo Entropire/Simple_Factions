@@ -18,6 +18,7 @@ public class OnInventoryClick  implements Listener
         int slot = e.getSlot();
 
         Button button = gui.getButton(slot);
+        if(button == null) return;
         button.onPressed(e);
     }
 }
