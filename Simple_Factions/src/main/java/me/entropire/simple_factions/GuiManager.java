@@ -1,14 +1,12 @@
 package me.entropire.simple_factions;
 
+import me.entropire.simple_factions.Gui.Gui;
 import me.entropire.simple_factions.objects.*;
 import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -312,21 +310,15 @@ public class GuiManager
                         throw new RuntimeException(e);
                     }
 
-                    if(!stateSnapshot.getText().equalsIgnoreCase(faction.getName()))
-                    {
-                        try {
-                            factionManager.modifyName(player, faction.getName());
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                        return Arrays.asList(AnvilGUI.ResponseAction.close());
+                    try {
+                        factionManager.modifyName(player, faction.getName());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
                     }
-                    else
-                    {
-                        return Arrays.asList(AnvilGUI.ResponseAction.replaceInputText("name"));
-                    }
+
+                    return Arrays.asList(AnvilGUI.ResponseAction.close());
                 })
-                .text("name")
+                .text("")
                 .title("Change faction name")
                 .plugin(simpleFactionsPlugin)
                 .open(player);

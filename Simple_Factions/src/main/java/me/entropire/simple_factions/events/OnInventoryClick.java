@@ -1,6 +1,7 @@
 package me.entropire.simple_factions.events;
 
-import me.entropire.simple_factions.objects.*;
+import me.entropire.simple_factions.Gui.Button;
+import me.entropire.simple_factions.Gui.Gui;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;

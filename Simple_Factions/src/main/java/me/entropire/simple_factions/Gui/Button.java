@@ -1,5 +1,6 @@
-package me.entropire.simple_factions.objects;
+package me.entropire.simple_factions.Gui;
 
+import me.entropire.simple_factions.objects.ButtonPressAction;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
