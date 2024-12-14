@@ -1,7 +1,9 @@
 package me.entropire.simple_factions.commands;
 
 import me.entropire.simple_factions.FactionManager;
-import me.entropire.simple_factions.GuiManager;
+import me.entropire.simple_factions.Gui.CreateFactionGui;
+import me.entropire.simple_factions.Gui.FactionGui;
+import me.entropire.simple_factions.Gui.SimpleFactionGui;
 import me.entropire.simple_factions.Simple_Factions;
 import me.entropire.simple_factions.objects.Faction;
 import org.bukkit.Bukkit;
@@ -12,7 +14,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -21,12 +22,10 @@ public class FactionCommand implements CommandExecutor, TabCompleter
 {
     Simple_Factions simpleFactionsPlugin;
     FactionManager factionManager;
-    GuiManager gui;
 
     public FactionCommand(Simple_Factions simpleFactionsPlugin)
     {
         factionManager = new FactionManager(simpleFactionsPlugin);
-        gui = new GuiManager(simpleFactionsPlugin);
         this.simpleFactionsPlugin = simpleFactionsPlugin;
     }
 
@@ -45,17 +44,17 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             {
                 int factionId = simpleFactionsPlugin.playerDatabase.getFactionId(player);
                 Faction faction = simpleFactionsPlugin.factionDatabase.getFactionDataById(factionId);
-                gui.Faction(player, faction);
+                new FactionGui(simpleFactionsPlugin, faction).open(player);
                 return true;
             }
 
             if(simpleFactionsPlugin.createFactions.containsKey(player.getUniqueId()))
             {
-               gui.CreateFaction(player);
+               new CreateFactionGui(simpleFactionsPlugin).open(player);
             }
             else
             {
-                gui.SimpleFaction(player);
+                new SimpleFactionGui(simpleFactionsPlugin).open(player);
             }
 
             return false;
