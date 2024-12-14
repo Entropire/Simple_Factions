@@ -19,11 +19,9 @@ public class FactionDatabase
     {
         this.dataBaseContext = dataBaseContext;
 
-        try (Connection connection = dataBaseContext.CreateConnection())
+        try (Statement statement = dataBaseContext.con.createStatement())
         {
-            try (Statement statement = connection.createStatement())
-            {
-                statement.execute("""
+            statement.execute("""
                 CREATE TABLE IF NOT EXISTS Factions (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT NOT NULL,
@@ -32,7 +30,6 @@ public class FactionDatabase
                     members TEXT NOT NULL
                 )
                 """);
-            }
         }
         catch (Exception e)
         {
@@ -42,7 +39,7 @@ public class FactionDatabase
 
     public void addFaction(Faction faction)
     {
-        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("U INTO Factions (name, color, owner, members) VALUES (?, ?, ?, ?)"))
+        try (PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("INSERT INTO Factions (name, color, owner, members) VALUES (?, ?, ?, ?)"))
         {
             preparedStatement.setString(1, faction.getName());
             preparedStatement.setString(2, colors.getColorNameWithChatColor(faction.getColor()));
@@ -58,7 +55,7 @@ public class FactionDatabase
 
     public boolean factionExistsByName(String factionName)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Factions WHERE name = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT * FROM Factions WHERE name = ?"))
         {
             preparedStatement.setString(1, factionName);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -73,7 +70,7 @@ public class FactionDatabase
 
     public void updateFactionName(int factionId, String newName)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Factions SET name = ? WHERE id = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("UPDATE Factions SET name = ? WHERE id = ?"))
         {
             preparedStatement.setString(1, newName);
             preparedStatement.setString(2, String.valueOf(factionId));
@@ -87,7 +84,7 @@ public class FactionDatabase
 
     public void updateFactionColor(int factionId, String newColor)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Factions SET color = ? WHERE id = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("UPDATE Factions SET color = ? WHERE id = ?"))
         {
             preparedStatement.setString(1, newColor);
             preparedStatement.setString(2, String.valueOf(factionId));
@@ -101,7 +98,7 @@ public class FactionDatabase
 
     public void updateFactionOwner(int factionId, String newOwnerUUid)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Factions SET owner = ? WHERE id = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("UPDATE Factions SET owner = ? WHERE id = ?"))
         {
             preparedStatement.setString(1, newOwnerUUid);
             preparedStatement.setString(2, String.valueOf(factionId));
@@ -116,7 +113,7 @@ public class FactionDatabase
     public void updateFactionMembers(int factionId, String member, Boolean add)
     {
         ArrayList<String> membersList;
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT members FROM Factions WHERE id = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT members FROM Factions WHERE id = ?"))
         {
             preparedStatement.setString(1, String.valueOf(factionId));
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -131,7 +128,7 @@ public class FactionDatabase
                 membersList.remove(member);
             }
 
-            try(PreparedStatement preparedStatement2 = connection.prepareStatement("UPDATE Factions SET members = ? WHERE id = ?"))
+            try(PreparedStatement preparedStatement2 = dataBaseContext.con.prepareStatement("UPDATE Factions SET members = ? WHERE id = ?"))
             {
                 preparedStatement2.setString(1, String.join(",", membersList));
                 preparedStatement2.setString(2, String.valueOf(factionId));
@@ -150,7 +147,7 @@ public class FactionDatabase
 
     public Faction getFactionDataById(int factionId)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Factions WHERE id = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT * FROM Factions WHERE id = ?"))
         {
             preparedStatement.setString(1, String.valueOf(factionId));
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -177,7 +174,7 @@ public class FactionDatabase
 
     public Faction getFactionDataByName(String factionName)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Factions WHERE name = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT * FROM Factions WHERE name = ?"))
         {
             preparedStatement.setString(1, factionName);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -205,7 +202,7 @@ public class FactionDatabase
     public ArrayList<String> getFactions()
     {
         ArrayList<String> factionNames = new ArrayList<>();
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Factions"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT * FROM Factions"))
         {
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -224,7 +221,7 @@ public class FactionDatabase
 
     public void deleteFaction(int factionId)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Factions WHERE id = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("DELETE FROM Factions WHERE id = ?"))
         {
             preparedStatement.setString(1, String.valueOf(factionId));
             preparedStatement.executeUpdate();

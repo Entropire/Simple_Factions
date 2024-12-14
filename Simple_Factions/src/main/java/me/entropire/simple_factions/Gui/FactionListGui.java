@@ -17,7 +17,7 @@ public class FactionListGui extends BaseGui
 
     public void open(Player player)
     {
-        Gui gui = new Gui("Faction page " + pageNumber, 54);
+        Gui gui = new Gui("Factions page " + pageNumber, 54);
         ArrayList<String> factions = plugin.factionDatabase.getFactions();
 
         if(!factions.isEmpty())
@@ -45,7 +45,7 @@ public class FactionListGui extends BaseGui
         }
         else
         {
-            gui.addButton(53, "", Material.GRAY_STAINED_GLASS_PANE, "", null);
+            gui.addButton(53, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
         }
 
         if(pageNumber > 0)
@@ -59,7 +59,7 @@ public class FactionListGui extends BaseGui
         }
         else
         {
-            gui.addButton(45, "", Material.GRAY_STAINED_GLASS_PANE, "", null);
+            gui.addButton(45, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
         }
 
         gui.addButton(49, "Leave", Material.RED_WOOL, "Go back to the main menu.",

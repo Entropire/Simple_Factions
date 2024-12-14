@@ -48,14 +48,14 @@ public class CreateFactionGui extends BaseGui
                 (btn, event) -> new SetFactionColorGui(plugin).open(player));
 
         gui.addButton(23, "Discard", Material.RED_WOOL, "Discard your faction creation.", (btn, event) -> {
-            factionManager.DeleteFactionCreation((Player)event.getView().getPlayer());
+            factionManager.DeleteFactionCreation(player);
             event.getView().getPlayer().closeInventory();
         });
 
         if(!factionName.contains("New Faction"))
         {
             gui.addButton(21, "Create", Material.GREEN_WOOL, "Create your new faction.", (btn, event) -> {
-                factionManager.create((Player)event.getView().getPlayer());
+                factionManager.create(player);
                 player.closeInventory();
             });
         }

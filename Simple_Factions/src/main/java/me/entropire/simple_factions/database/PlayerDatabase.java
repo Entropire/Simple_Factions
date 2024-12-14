@@ -15,7 +15,7 @@ public class PlayerDatabase
     {
         this.dataBaseContext = dataBaseContext;
 
-        try (Connection connection = dataBaseContext.CreateConnection(); Statement statement = connection.createStatement())
+        try (Statement statement = dataBaseContext.con.createStatement())
         {
             statement.execute("""
             CREATE TABLE IF NOT EXISTS Players (
@@ -34,7 +34,7 @@ public class PlayerDatabase
 
     public void addPlayer(Player player)
     {
-        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Players (uuid, name) VALUES (?, ?)"))
+        try (PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("INSERT INTO Players (uuid, name) VALUES (?, ?)"))
         {
             preparedStatement.setString(1, player.getUniqueId().toString());
             preparedStatement.setString(2, player.getName());
@@ -48,7 +48,7 @@ public class PlayerDatabase
 
     public boolean playerExists(String playerName)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Players WHERE name = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT * FROM Players WHERE name = ?"))
         {
             preparedStatement.setString(1, playerName);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -64,7 +64,7 @@ public class PlayerDatabase
     public int getFactionId(Player player)
     {
         int factionId = -1;
-        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT factionId FROM Players WHERE uuid = ?"))
+        try (PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT factionId FROM Players WHERE uuid = ?"))
         {
             preparedStatement.setString(1, player.getUniqueId().toString());
             try (ResultSet resultSet = preparedStatement.executeQuery())
@@ -84,7 +84,7 @@ public class PlayerDatabase
 
     public void updateFactionWithPlayerUUID(UUID uuid, int factionId)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Players SET factionId = ? WHERE uuid = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("UPDATE Players SET factionId = ? WHERE uuid = ?"))
         {
             preparedStatement.setString(1, String.valueOf(factionId));
             preparedStatement.setString(2, uuid.toString());
@@ -98,7 +98,7 @@ public class PlayerDatabase
 
     public void updateFactionWithPlayerName(String name, int factionId)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Players SET factionId = ? WHERE name = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("UPDATE Players SET factionId = ? WHERE name = ?"))
         {
             preparedStatement.setString(1, String.valueOf(factionId));
             preparedStatement.setString(2, name);
@@ -113,7 +113,7 @@ public class PlayerDatabase
     public boolean hasFaction(Player player)
     {
         boolean hasFaction = false;
-        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT factionId FROM Players WHERE uuid = ?"))
+        try (PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT factionId FROM Players WHERE uuid = ?"))
         {
             preparedStatement.setString(1, player.getUniqueId().toString());
             try (ResultSet resultSet = preparedStatement.executeQuery())
@@ -137,7 +137,7 @@ public class PlayerDatabase
 
     public UUID getPlayerUUID(String playerName)
     {
-        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT uuid FROM Players WHERE name = ?"))
+        try (PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT uuid FROM Players WHERE name = ?"))
         {
             preparedStatement.setString(1, playerName);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -156,7 +156,7 @@ public class PlayerDatabase
 
     public String getPlayerName(String uuid)
     {
-        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT name FROM Players WHERE uuid = ?"))
+        try (PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT name FROM Players WHERE uuid = ?"))
         {
             preparedStatement.setString(1, uuid);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -175,7 +175,7 @@ public class PlayerDatabase
 
     public String getChat(UUID uuid)
     {
-        try (Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT chat FROM Players WHERE uuid = ?"))
+        try (PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT chat FROM Players WHERE uuid = ?"))
         {
             preparedStatement.setString(1, uuid.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -194,7 +194,7 @@ public class PlayerDatabase
 
     public void setChat(UUID uuid, String chat)
     {
-        try(Connection connection = dataBaseContext.CreateConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Players SET chat = ? WHERE uuid = ?"))
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("UPDATE Players SET chat = ? WHERE uuid = ?"))
         {
             preparedStatement.setString(1, chat);
             preparedStatement.setString(2, uuid.toString());
@@ -206,3 +206,4 @@ public class PlayerDatabase
         }
     }
 }
+

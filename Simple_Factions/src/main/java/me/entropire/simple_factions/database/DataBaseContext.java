@@ -9,10 +9,11 @@ import java.sql.SQLException;
 public class DataBaseContext
 {
     private String path;
-
+    public Connection con;
     public DataBaseContext(String path)
     {
         this.path = path;
+        con = CreateConnection();
     }
 
     public Connection CreateConnection()
