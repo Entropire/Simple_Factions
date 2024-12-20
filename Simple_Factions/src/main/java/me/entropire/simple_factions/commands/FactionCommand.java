@@ -101,6 +101,9 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             case "now":
                 handleNowCommand(args, player); //should be removed in the released version
                 break;
+            case "add":
+                handleAddCommand(args, player); //should be removed in the released version
+                break;
             default:
                 player.sendMessage("Available commands for factions are");
                 player.sendMessage("/faction create");
@@ -131,7 +134,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
         factionManager.create(player, args[1]);
     }
 
-    private void handleNowCommand(String[] args, Player player) //may be removed in the released version
+    private void handleNowCommand(String[] args, Player player) //should be removed in the released version
     {
         if (args.length < 2)
         {
@@ -141,6 +144,21 @@ public class FactionCommand implements CommandExecutor, TabCompleter
 
         for(int i = 0; i < Integer.parseInt(args[1]); i++){
             factionManager.create(UUID.randomUUID(), "#$#$#$#$#$#$#$#$GHGHGHGHGHGHGH#$#$#$#$#$$#$#" + i);
+        }
+    }
+
+    private void handleAddCommand(String[] args, Player player)//should be removed in the released version
+    {
+        if (args.length < 2)
+        {
+            player.sendMessage(ChatColor.RED + "/faction create [amount].");
+            return;
+        }
+
+        for(int i = 0; i < Integer.parseInt(args[1]); i++){
+            
+
+
         }
     }
 
