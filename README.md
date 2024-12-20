@@ -10,9 +10,6 @@
 > [!WARNING]
 > This plugin is still in developemt. If you find a bug or feature that can be impoved you can open a issue for it.
 
-> [!NOTE]  
-> This code base uses the conventions stated [here](https://github.com/Entropire/Conventions).
-
 > [!NOTE]
 > This project includes code from AnvilGUI, © WesJD, licensed under the MIT License.
 
