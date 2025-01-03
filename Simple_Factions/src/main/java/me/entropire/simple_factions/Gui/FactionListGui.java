@@ -65,12 +65,12 @@ public class FactionListGui extends BaseGui
         gui.addButton(49, "Return", Material.RED_WOOL, "Go back to the main menu.",
                 (btn, event) -> new SimpleFactionGui().open(player));
 
-        gui.addButton(46, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
-        gui.addButton(47, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
-        gui.addButton(48, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
-        gui.addButton(50, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
-        gui.addButton(51, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
-        gui.addButton(52, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(46, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(47, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(48, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(50, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(51, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(52, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
 
         player.openInventory(gui.Create());
     }

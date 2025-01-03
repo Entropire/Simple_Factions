@@ -24,6 +24,7 @@ public class FactionMembersListGui extends BaseGui
         int factionId = Simple_Factions.playerDatabase.getFactionId(player);
         Faction faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
         ArrayList<String> members = faction.getMembers();
+        members.remove(player.getName());
 
         if(!members.isEmpty())
         {
@@ -72,12 +73,12 @@ public class FactionMembersListGui extends BaseGui
         gui.addButton(49, "Return", Material.RED_WOOL, "Go back to the main menu.",
                 (btn, event) -> new FactionGui(faction).open(player));
 
-        gui.addButton(46, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
-        gui.addButton(47, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
-        gui.addButton(48, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
-        gui.addButton(50, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
-        gui.addButton(51, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
-        gui.addButton(52, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(46, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(47, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(48, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(50, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(51, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
+        gui.addButton(52, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
 
         player.openInventory(gui.Create());
     }

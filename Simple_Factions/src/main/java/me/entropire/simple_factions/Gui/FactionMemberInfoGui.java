@@ -1,5 +1,6 @@
 package me.entropire.simple_factions.Gui;
 
+import me.entropire.simple_factions.FactionEditor;
 import me.entropire.simple_factions.objects.Faction;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -29,9 +30,15 @@ public class FactionMemberInfoGui extends BaseGui
 
         if(faction.getOwner().equals(player.getUniqueId()))
         {
-            gui.addButton(11, "Make owner", Material.PAPER, "Make this member the owner of the faction", null);
+            gui.addButton(11, "Make owner", Material.PAPER, "Make this member the owner of the faction",
+                    (btn, event) -> {
+                        FactionEditor.modifyOwner(player, memberName);
+                    });
 
-            gui.addButton(15, "Kick member", Material.RED_WOOL, "Kick player from the faction", null);
+            gui.addButton(15, "Kick member", Material.RED_WOOL, "Kick player from the faction",
+                    (btn, event) -> {
+                        FactionEditor.kick(player, memberName);
+                    });
         }
 
         player.openInventory(gui.Create());
