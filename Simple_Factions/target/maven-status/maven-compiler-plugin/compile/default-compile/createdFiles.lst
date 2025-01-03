@@ -28,5 +28,6 @@ me\entropire\simple_factions\database\DataBaseContext.class
 me\entropire\simple_factions\objects\Colors.class
 me\entropire\simple_factions\objects\Invite.class
 me\entropire\simple_factions\Gui\Button.class
+me\entropire\simple_factions\Gui\PlayerListGui.class
 me\entropire\simple_factions\FactionEditor.class
 me\entropire\simple_factions\Gui\FactionInfoGui.class

@@ -17,6 +17,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class FactionCommand implements CommandExecutor, TabCompleter
@@ -304,14 +305,24 @@ public class FactionCommand implements CommandExecutor, TabCompleter
                         }
                         break;
                     case "invite":
-                        player.sendMessage("you made it");
-                        suggestions.addAll(Simple_Factions.playerDatabase.getPlayerWithNoFaction());
+                        ArrayList<String> playerNames = Simple_Factions.playerDatabase.getPlayerWithNoFaction();
+                        Iterator<String> playerNamesIterator = playerNames.iterator();
+
+                        while(playerNamesIterator.hasNext())
+                        {
+                            Player noFactionPlayer = Bukkit.getPlayer(playerNamesIterator.next());
+                            if(noFactionPlayer == null || !noFactionPlayer.isOnline())
+                            {
+                                playerNamesIterator.remove();
+                            }
+                        }
+
+                        suggestions.addAll(playerNames);
                         break;
                     case "join":
                         suggestions.addAll(Simple_Factions.factionDatabase.getFactions());
                         break;
                     case "modify":
-                        player.sendMessage("you made it to modify good job");
                         suggestions.add("name");
                         suggestions.add("color");
                         suggestions.add("owner");

@@ -62,7 +62,7 @@ public class FactionGui extends BaseGui
         if(faction.getOwner().equals(player.getUniqueId()))
         {
             gui.addButton(18, "Invite Player", Material.PAPER,  "", (btn, event) -> {
-
+                new PlayerListGui(0, faction).open(player);
             });
 
             gui.addButton(26, "Delete Faction", Material.RED_WOOL,  "", (btn, event) -> {
