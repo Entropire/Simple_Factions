@@ -1,6 +1,5 @@
 package me.entropire.simple_factions.Gui;
 
-import me.entropire.simple_factions.Simple_Factions;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -17,6 +16,6 @@ public class SimpleFactionGui extends BaseGui
         gui.addButton(15, "Join faction", Material.NAME_TAG, "Join a faction.",
                 (btn, event) -> new FactionListGui(0).open(player));
 
-        player.openInventory(gui.Create());
+        player.openInventory(gui.create());
     }
 }

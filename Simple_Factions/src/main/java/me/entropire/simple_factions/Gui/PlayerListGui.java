@@ -11,17 +11,19 @@ import java.util.Iterator;
 public class PlayerListGui extends BaseGui
 {
     private int pageNumber;
-    private Faction faction;
 
-    public PlayerListGui(int pageNumber, Faction faction)
+    public PlayerListGui(int pageNumber)
     {
         this.pageNumber = pageNumber;
-        this.faction = faction;
     }
 
     public void open(Player player)
     {
         Gui gui = new Gui("Player page " + pageNumber, GuiSize.Large);
+
+        int factionId = Simple_Factions.playerDatabase.getFactionId(player);
+        Faction faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
+
         ArrayList<String> playerNames = Simple_Factions.playerDatabase.getPlayerWithNoFaction();
         Iterator<String> playerNamesIterator = playerNames.iterator();
 
@@ -42,7 +44,7 @@ public class PlayerListGui extends BaseGui
             for(int i = 45 * pageNumber, j = Math.min(45 * (pageNumber + 1), playerNames.size()); i < j; i++)
             {
                 gui.addButton(index, playerNames.get(i), Material.PLAYER_HEAD, "",
-                        (btn, event) -> new FactionInfoGui(btn.getItemMeta().getDisplayName()).open(player));
+                        (btn, event) -> new PlayerInviteGui(btn.getItemMeta().getDisplayName()).open(player));
 
                 index++;
             }
@@ -88,6 +90,6 @@ public class PlayerListGui extends BaseGui
         gui.addButton(51, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
         gui.addButton(52, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
 
-        player.openInventory(gui.Create());
+        player.openInventory(gui.create());
     }
 }

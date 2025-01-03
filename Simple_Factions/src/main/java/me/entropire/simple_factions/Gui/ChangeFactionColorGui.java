@@ -34,6 +34,6 @@ public class ChangeFactionColorGui extends BaseGui
             i++;
         }
 
-        player.openInventory(gui.Create());
+        player.openInventory(gui.create());
     }
 }

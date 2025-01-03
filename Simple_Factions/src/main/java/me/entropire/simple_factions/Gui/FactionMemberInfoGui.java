@@ -41,6 +41,6 @@ public class FactionMemberInfoGui extends BaseGui
                     });
         }
 
-        player.openInventory(gui.Create());
+        player.openInventory(gui.create());
     }
 }

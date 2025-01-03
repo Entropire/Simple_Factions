@@ -49,7 +49,7 @@ public class Gui implements InventoryHolder
         return buttons.get(slot);
     }
 
-    public Inventory Create()
+    public Inventory create()
     {
         Inventory inventory = Bukkit.createInventory(this, size, name);
 

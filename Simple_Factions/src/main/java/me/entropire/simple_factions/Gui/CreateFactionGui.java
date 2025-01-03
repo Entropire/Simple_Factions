@@ -57,6 +57,6 @@ public class CreateFactionGui extends BaseGui
             });
         }
 
-        player.openInventory(gui.Create());
+        player.openInventory(gui.create());
     }
 }

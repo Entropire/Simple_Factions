@@ -80,6 +80,6 @@ public class FactionMembersListGui extends BaseGui
         gui.addButton(51, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
         gui.addButton(52, ".", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
 
-        player.openInventory(gui.Create());
+        player.openInventory(gui.create());
     }
 }
