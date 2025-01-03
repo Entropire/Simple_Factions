@@ -33,7 +33,7 @@ public class FactionDatabase
         }
         catch (Exception e)
         {
-            Bukkit.getServer().getConsoleSender().sendMessage("Failed to create/load factions table in database: " + e.getMessage());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to create/load factions table in database: " + e.getMessage());
         }
     }
 
@@ -63,7 +63,7 @@ public class FactionDatabase
         }
         catch (Exception e)
         {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to check if name was already in use in factions table: " + e.getMessage());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed te retrieve objects where name equals (factionName) in factions table: " + e.getMessage());
             return true;
         }
     }
@@ -92,7 +92,7 @@ public class FactionDatabase
         }
         catch (Exception e)
         {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to update faction color in factions table:" + e.getMessage());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to update faction color in factions table: " + e.getMessage());
         }
     }
 
@@ -106,7 +106,7 @@ public class FactionDatabase
         }
         catch (Exception e)
         {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to update faction owner in factions table:" + e.getMessage());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to update faction owner in factions table: " + e.getMessage());
         }
     }
 
@@ -167,7 +167,7 @@ public class FactionDatabase
         }
         catch (Exception e)
         {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to get faction data of faction out factions table with faction id: " + e.getMessage());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to get faction data out factions table with faction id: " + e.getMessage());
         }
         return null;
     }
@@ -194,7 +194,7 @@ public class FactionDatabase
         }
         catch (Exception e)
         {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to get faction data of faction out factions table with faction name: " + e.getMessage());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to get faction data out factions table with faction name: " + e.getMessage());
         }
         return null;
     }

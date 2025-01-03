@@ -93,7 +93,7 @@ public class PlayerDatabase
         }
         catch (Exception e)
         {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to update factionId in players table with playerUUID" + e.getMessage());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to update factionId in players table with playerUUID: " + e.getMessage());
         }
     }
 
@@ -226,32 +226,7 @@ public class PlayerDatabase
         }
         catch (Exception e)
         {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to set player chat in players table: " + e.getMessage());
-        }
-
-        return null;
-    }
-
-    public ArrayList<UUID> getPlayerUUIDWithNoFaction()
-    {
-        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT uuid FROM Players WHERE factionId = 0"))
-        {
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            ArrayList<UUID> playerUUIDs = new ArrayList<>();
-
-            // Loop through the ResultSet and add names to the ArrayList
-            while (resultSet.next())
-            {
-                String uuid = resultSet.getString("uuid");
-                playerUUIDs.add(UUID.fromString(uuid));
-            }
-
-            return playerUUIDs;
-        }
-        catch (Exception e)
-        {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to set player chat in players table: " + e.getMessage());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to get player names where factionId equals 0: " + e.getMessage());
         }
 
         return null;

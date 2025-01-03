@@ -21,7 +21,7 @@ public class FactionEditor
         }
         if(Simple_Factions.plugin.factionDatabase.factionExistsByName(factionName))
         {
-            player.sendMessage(RED + "There already is a faction with the name '" + factionName + "'.");
+            player.sendMessage(RED + "The name " + factionName + " is already in use by another faction!");
             return;
         }
 
@@ -34,7 +34,7 @@ public class FactionEditor
 
         changePlayerDisplayName(player, faction.getColor() + "[" + faction.getName() + "] " + player.getName());
 
-        player.sendMessage(GREEN + "New faction " + factionName + " created.");
+        player.sendMessage(AQUA + "New faction " + factionName + " created.");
     }
 
     public static void create(Player player)
@@ -55,7 +55,7 @@ public class FactionEditor
     {
         if(!Simple_Factions.playerDatabase.hasFaction(player))
         {
-            player.sendMessage(RED + "You must be in a faction to kick somebody.");
+            player.sendMessage(RED + "You must be in a faction to preform this action!");
             return;
         }
 
@@ -64,18 +64,18 @@ public class FactionEditor
 
         if(!factionData.getOwner().equals(player.getUniqueId()))
         {
-            player.sendMessage(RED + "Only the owner of the faction can kick some wane.");
+            player.sendMessage(RED + "You must be the owner of the faction to preform this action!");
             return;
         }
         if(!factionData.getMembers().contains(playerName))
         {
-            player.sendMessage(RED + "This player is not in your faction.");
+            player.sendMessage(RED + "This player is not a part of your faction!");
             return;
         }
         UUID playerToKickId = Simple_Factions.playerDatabase.getPlayerUUID(playerName);
         if(factionData.getOwner().equals(playerToKickId))
         {
-            player.sendMessage(RED + "The owner can not be kicked from the faction.");
+            player.sendMessage(RED + "You can not kick the owner from the faction!");
             return;
         }
         Player playerToKick = player.getServer().getPlayer(playerName);
@@ -83,12 +83,14 @@ public class FactionEditor
         Simple_Factions.factionDatabase.updateFactionMembers(factionId, playerName, false);
         Simple_Factions.playerDatabase.updateFactionWithPlayerName(playerName, 0);
 
-        player.sendMessage(YELLOW + "You have kicked " + playerName + " from your faction.");
+        player.sendMessage(AQUA + "You have kicked " + playerName + " out of your faction");
         if(playerToKick != null){
             changePlayerDisplayName(playerToKick, playerToKick.getName());
-            if(playerToKick.isOnline()) playerToKick.sendMessage(YELLOW + "You have been kicked from your faction.");
+            if(playerToKick.isOnline()) playerToKick.sendMessage(AQUA + "You have been kicked from your faction");
         }
     }
+
+    // I was here
 
     public static void leave(Player player)
     {

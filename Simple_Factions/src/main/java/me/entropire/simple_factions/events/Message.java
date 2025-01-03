@@ -38,7 +38,7 @@ public class Message implements Listener
                     handleFactionChat(faction, player, message);
                     break;
                 default:
-                    player.sendMessage("error: " + simpleFactionsPlugin.playerDatabase.getChat(player.getUniqueId()));
+                    player.sendMessage(ChatColor.RED + "Could not retrieve chat type!");
             }
         }
         else

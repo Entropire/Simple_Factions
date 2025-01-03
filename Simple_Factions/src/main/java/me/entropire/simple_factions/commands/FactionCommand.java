@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+
 public class FactionCommand implements CommandExecutor, TabCompleter
 {
     @Override
@@ -27,7 +29,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
     {
         if (!(sender instanceof Player player))
         {
-            sender.sendMessage(ChatColor.RED + "Only players can use this command.");
+            sender.sendMessage(ChatColor.RED + "Only players can preform this command!");
             return false;
         }
 
@@ -92,19 +94,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
                 handleModifyCommand(args, player);
                 break;
             default:
-                player.sendMessage("Available commands for factions are");
-                player.sendMessage("/faction create");
-                player.sendMessage("/faction delete");
-                player.sendMessage("/faction list");
-                player.sendMessage("/faction owner");
-                player.sendMessage("/faction members");
-                player.sendMessage("/faction leave");
-                player.sendMessage("/faction kick");
-                player.sendMessage("/faction invite");
-                player.sendMessage("/faction join");
-                player.sendMessage("/faction accept");
-                player.sendMessage("/faction decline");
-                player.sendMessage("/faction modify");
+                player.sendMessage(ChatColor.YELLOW + "Invalid command!");
                 break;
         }
         return false;
@@ -114,7 +104,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
     {
         if (args.length < 2)
         {
-            player.sendMessage(ChatColor.RED + "/faction create [faction name].");
+            player.sendMessage(ChatColor.YELLOW + "Command usage /faction create [Faction name]");
             return;
         }
 
@@ -155,7 +145,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
     private void handleKickCommand(String[] args, Player player)
     {
         if (args.length < 2) {
-            player.sendMessage(ChatColor.RED + "/faction kick [Player name]");
+            player.sendMessage(ChatColor.YELLOW + "Command usage /faction kick [Player name]");
             return;
         }
 
@@ -166,7 +156,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
     {
         if(args.length < 2)
         {
-            player.sendMessage(ChatColor.RED + "/faction invite [Player name]");
+            player.sendMessage(ChatColor.YELLOW + "Command usage /faction invite [Player name]");
             return;
         }
 
@@ -176,7 +166,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
     private void handleJoinCommand(String[] args, Player player)
     {
         if(args.length < 2){
-            player.sendMessage(ChatColor.RED + "/faction join [Faction name]");
+            player.sendMessage(ChatColor.YELLOW + "Command usage /faction join [Faction name]");
             return;
         }
 
@@ -196,10 +186,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
     private void handleModifyCommand(String[] args, Player player){
         if(args.length < 2)
         {
-            player.sendMessage("Available commands for factions modify are");
-            player.sendMessage("/faction modify name [new faction name]");
-            player.sendMessage("/faction modify color [color name]");
-            player.sendMessage("/faction modify owner [member name]");
+            player.sendMessage( ChatColor.YELLOW + "Invalid command!");
             return;
         }
         switch (args[1].toLowerCase())
@@ -214,10 +201,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
                 handleModifyOwnerCommand(args, player);
                 break;
             default:
-                player.sendMessage("Available commands for factions modify are");
-                player.sendMessage("/faction modify name [new faction name]");
-                player.sendMessage("/faction modify color [color name]");
-                player.sendMessage("/faction modify owner [member name]");
+                player.sendMessage(ChatColor.YELLOW + "Invalid command!");
                 break;
         }
     }
@@ -226,7 +210,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
     {
         if(args.length < 3)
         {
-            player.sendMessage(ChatColor.RED + "/faction modify name [new Faction name]");
+            player.sendMessage(ChatColor.YELLOW + "Command usage /faction modify name [New faction name]");
             return;
         }
 
@@ -237,7 +221,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
     {
         if(args.length < 3)
         {
-            player.sendMessage(ChatColor.RED + "/faction modify name [Color]");
+            player.sendMessage(ChatColor.YELLOW + "Command usage /faction modify name [Color name]");
             return;
         }
 
@@ -248,18 +232,11 @@ public class FactionCommand implements CommandExecutor, TabCompleter
     {
         if(args.length < 3)
         {
-            player.sendMessage(ChatColor.RED + "/faction modify owner [member name]");
+            player.sendMessage(ChatColor.YELLOW + "Command usage /faction modify owner [Member name]");
             return;
         }
 
         FactionEditor.modifyOwner(player, args[2]);
-    }
-
-    private void handleException(Exception ex, Player player, String message)
-    {
-        ex.printStackTrace();
-        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + message + ex.getMessage());
-        player.sendMessage(ChatColor.RED + message);
     }
 
     @Override

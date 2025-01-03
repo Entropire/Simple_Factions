@@ -1,6 +1,7 @@
 package me.entropire.simple_factions.database;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,7 +25,7 @@ public class DataBaseContext
         }
         catch (SQLException e)
         {
-            Bukkit.getServer().getConsoleSender().sendMessage("Failed to connect to the dataBase: " + e.getMessage());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED +  "Failed to connect to the dataBase: " + e.getMessage());
             return null;
         }
     }
