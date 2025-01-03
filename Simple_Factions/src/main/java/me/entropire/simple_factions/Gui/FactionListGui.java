@@ -10,15 +10,15 @@ public class FactionListGui extends BaseGui
 {
     private int pageNumber;
 
-    public FactionListGui(Simple_Factions plugin, int pageNumber) {
-        super(plugin);
+    public FactionListGui(int pageNumber)
+    {
         this.pageNumber = pageNumber;
     }
 
     public void open(Player player)
     {
-        Gui gui = new Gui("Factions page " + pageNumber, 54);
-        ArrayList<String> factions = plugin.factionDatabase.getFactions();
+        Gui gui = new Gui("Factions page " + pageNumber, GuiSize.Large);
+        ArrayList<String> factions = Simple_Factions.factionDatabase.getFactions();
 
         if(!factions.isEmpty())
         {
@@ -26,7 +26,7 @@ public class FactionListGui extends BaseGui
             for(int i = 45 * pageNumber, j = Math.min(45 * (pageNumber + 1), factions.size()); i < j; i++)
             {
                 gui.addButton(index, factions.get(i), Material.PLAYER_HEAD, "",
-                        (btn, event) -> new FactionInfoGui(plugin, btn.getItemMeta().getDisplayName()).open(player));
+                        (btn, event) -> new FactionInfoGui(btn.getItemMeta().getDisplayName()).open(player));
 
                 index++;
             }
@@ -40,7 +40,7 @@ public class FactionListGui extends BaseGui
                 String inventoryName = event.getView().getTitle().replace("Factions page ", "");
                 int eventPageNumber = Integer.parseInt(inventoryName) + 1;
 
-                new FactionListGui(plugin, eventPageNumber).open(player);
+                new FactionListGui(eventPageNumber).open(player);
             });
         }
         else
@@ -54,7 +54,7 @@ public class FactionListGui extends BaseGui
                 String inventoryName = event.getView().getTitle().replace("Factions page ", "");
                 int eventPageNumber = Integer.parseInt(inventoryName) - 1;
 
-                new FactionListGui(plugin, eventPageNumber).open(player);
+                new FactionListGui(eventPageNumber).open(player);
             });
         }
         else
@@ -63,7 +63,7 @@ public class FactionListGui extends BaseGui
         }
 
         gui.addButton(49, "Leave", Material.RED_WOOL, "Go back to the main menu.",
-                (btn, event) -> new SimpleFactionGui(plugin).open(player));
+                (btn, event) -> new SimpleFactionGui().open(player));
 
         gui.addButton(46, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
         gui.addButton(47, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});

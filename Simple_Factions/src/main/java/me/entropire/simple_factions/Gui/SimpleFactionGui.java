@@ -6,20 +6,16 @@ import org.bukkit.entity.Player;
 
 public class SimpleFactionGui extends BaseGui
 {
-    public SimpleFactionGui(Simple_Factions plugin) {
-        super(plugin);
-    }
-
     @Override
     public void open(Player player)
     {
-        Gui gui = new Gui("Simple-Factions", 27);
+        Gui gui = new Gui("Simple-Factions", GuiSize.Small);
 
         gui.addButton(11, "Create new faction", Material.ANVIL, "Create a new faction.",
-                (btn, event) -> new CreateFactionGui(plugin).open(player));
+                (btn, event) -> new CreateFactionGui().open(player));
 
         gui.addButton(15, "Join faction", Material.NAME_TAG, "Join a faction.",
-                (btn, event) -> new FactionListGui(plugin, 0).open(player));
+                (btn, event) -> new FactionListGui(0).open(player));
 
         player.openInventory(gui.Create());
     }

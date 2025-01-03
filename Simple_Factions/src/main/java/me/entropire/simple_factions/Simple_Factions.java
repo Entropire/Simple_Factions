@@ -20,29 +20,33 @@ import java.util.UUID;
 
 public final class Simple_Factions extends JavaPlugin
 {
-    public FactionDatabase factionDatabase;
-    public PlayerDatabase playerDatabase;
-    public Map<UUID, Faction> createFactions = new HashMap<>();
-    public final Map<UUID, Invite> invites = new HashMap<>();
-    public final Map<UUID, Join> joins = new HashMap<>();
+    public static Simple_Factions plugin;
+
+    public static FactionDatabase factionDatabase;
+    public static PlayerDatabase playerDatabase;
+    public static Map<UUID, Faction> createFactions = new HashMap<>();
+    public static final Map<UUID, Invite> invites = new HashMap<>();
+    public static final Map<UUID, Join> joins = new HashMap<>();
 
     @Override
     public void onEnable()
     {
+        if(plugin == null) plugin = this;
+
         //loads events
         this.getServer().getPluginManager().registerEvents(new OnJoin(this), this);
         this.getServer().getPluginManager().registerEvents(new Message(this), this);
         this.getServer().getPluginManager().registerEvents(new OnInventoryClick(), this);
 
         //loads commands
-        getCommand("faction").setExecutor(new FactionCommand(this));
-        getCommand("f").setExecutor(new FactionCommand(this));
-        getCommand("chat").setExecutor(new chatCommands(this));
+        getCommand("faction").setExecutor(new FactionCommand());
+        getCommand("f").setExecutor(new FactionCommand());
+        getCommand("chat").setExecutor(new chatCommands());
 
         //loads commands tab completer
-        getCommand("faction").setTabCompleter(new FactionCommand(this));
-        getCommand("f").setTabCompleter(new FactionCommand(this));
-        getCommand("chat").setTabCompleter(new chatCommands(this));
+        getCommand("faction").setTabCompleter(new FactionCommand());
+        getCommand("f").setTabCompleter(new FactionCommand());
+        getCommand("chat").setTabCompleter(new chatCommands());
 
         if (!getDataFolder().exists()) getDataFolder().mkdir();
         DataBaseContext dataBaseContext = new DataBaseContext(getDataFolder().getAbsolutePath() + "/Simple-Faction.db");

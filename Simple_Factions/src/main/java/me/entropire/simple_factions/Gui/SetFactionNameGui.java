@@ -9,10 +9,6 @@ import java.util.Collections;
 
 public class SetFactionNameGui extends BaseGui
 {
-    public SetFactionNameGui(Simple_Factions plugin) {
-        super(plugin);
-    }
-
     @Override
     public void open(Player player)
     {
@@ -24,8 +20,9 @@ public class SetFactionNameGui extends BaseGui
 
                     if(!stateSnapshot.getText().equalsIgnoreCase("name"))
                     {
-                        plugin.createFactions.get(player.getUniqueId()).setName(stateSnapshot.getText());
-                        new CreateFactionGui(plugin).open(player);
+                        if
+                        Simple_Factions.createFactions.get(player.getUniqueId()).setName(stateSnapshot.getText());
+                        new CreateFactionGui().open(player);
                         return Arrays.asList(AnvilGUI.ResponseAction.close());
                     }
                     else
@@ -35,7 +32,7 @@ public class SetFactionNameGui extends BaseGui
                 })
                 .text("name")
                 .title("Set faction name")
-                .plugin(plugin)
+                .plugin(Simple_Factions.plugin)
                 .open(player);
     }
 }

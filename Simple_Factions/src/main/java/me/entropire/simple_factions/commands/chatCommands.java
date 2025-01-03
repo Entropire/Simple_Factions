@@ -1,14 +1,12 @@
 package me.entropire.simple_factions.commands;
 
 import me.entropire.simple_factions.Simple_Factions;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,13 +16,7 @@ import static org.bukkit.ChatColor.RED;
 
 public class chatCommands implements CommandExecutor, TabCompleter
 {
-    private final Simple_Factions simpleFactionsPlugin;
     ArrayList<String> chats = new ArrayList<>(Arrays.asList("public", "faction"));
-
-    public chatCommands(Simple_Factions simpleFactionsPlugin)
-    {
-        this.simpleFactionsPlugin = simpleFactionsPlugin;
-    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args)
@@ -41,12 +33,12 @@ public class chatCommands implements CommandExecutor, TabCompleter
             return false;
         }
 
-        if(!simpleFactionsPlugin.playerDatabase.hasFaction(player))
+        if(!Simple_Factions.playerDatabase.hasFaction(player))
         {
             player.sendMessage(RED + "You must be in a faction to change chat.");
             return false;
         }
-        simpleFactionsPlugin.playerDatabase.setChat(player.getUniqueId(), args[0].toLowerCase());
+        Simple_Factions.playerDatabase.setChat(player.getUniqueId(), args[0].toLowerCase());
         player.sendMessage(GREEN + "Set chat to " + args[0]);
 
         return false;

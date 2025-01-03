@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class PlayerDatabase
@@ -204,6 +205,31 @@ public class PlayerDatabase
         {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to set player chat in players table: " + e.getMessage());
         }
+    }
+
+    public ArrayList<String> getPlayerWithNoFaction()
+    {
+        try(PreparedStatement preparedStatement = dataBaseContext.con.prepareStatement("SELECT name FROM Players WHERE factionId = 0"))
+        {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            ArrayList<String> playerNames = new ArrayList<>();
+
+            // Loop through the ResultSet and add names to the ArrayList
+            while (resultSet.next())
+            {
+                String name = resultSet.getString("name");
+                playerNames.add(name);
+            }
+
+            return playerNames;
+        }
+        catch (Exception e)
+        {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to set player chat in players table: " + e.getMessage());
+        }
+
+        return null;
     }
 }
 

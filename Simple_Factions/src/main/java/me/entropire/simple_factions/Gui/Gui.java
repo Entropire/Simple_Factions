@@ -8,16 +8,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
+enum GuiSize {
+    Small,
+    Large
+}
 public class Gui implements InventoryHolder
 {
     private String name;
     private int size;
     private Map<Integer, Button> buttons = new HashMap<>();
 
-    public Gui(String name, int size)
+    public Gui(String name, GuiSize size)
     {
         this.name = name;
-        this.size = size;
+        this.size = size == GuiSize.Small ? 27 : 54;
     }
 
     @Override

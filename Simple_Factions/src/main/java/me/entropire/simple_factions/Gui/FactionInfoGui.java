@@ -1,5 +1,6 @@
 package me.entropire.simple_factions.Gui;
 
+import me.entropire.simple_factions.FactionInvitor;
 import me.entropire.simple_factions.Simple_Factions;
 import me.entropire.simple_factions.objects.Faction;
 import org.bukkit.Bukkit;
@@ -13,17 +14,17 @@ public class FactionInfoGui extends BaseGui
 {
     private String factionName;
 
-    public FactionInfoGui(Simple_Factions plugin, String factionName) {
-        super(plugin);
+    public FactionInfoGui(String factionName)
+    {
         this.factionName = factionName;
     }
 
     @Override
     public void open(Player player)
     {
-        Gui gui = new Gui("Info of " + factionName, 27);
+        Gui gui = new Gui("Info of " + factionName, GuiSize.Small);
 
-        Faction faction = plugin.factionDatabase.getFactionDataByName(factionName);
+        Faction faction = Simple_Factions.factionDatabase.getFactionDataByName(factionName);
 
         if(faction == null) { player.sendMessage(ChatColor.RED + "Somthing whent rong while getting the factions information."); return; }
 
@@ -51,11 +52,12 @@ public class FactionInfoGui extends BaseGui
         gui.addButton(6, "Faction members", Material.OAK_SIGN, top10Members, (btn, event) -> {});
         gui.addButton(21, "Join", Material.GREEN_WOOL, "Request to join this faction.", (btn, event) -> {
             String EventFactionName = event.getView().getTitle().replace("Info of ", "");
-            factionManager.join(player, EventFactionName);
+            FactionInvitor.join(player, EventFactionName);
+            player.closeInventory();
         });
 
         gui.addButton(23, "Leave", Material.RED_WOOL, "Go back to the previous page.",
-                (btn, event) -> new FactionListGui(plugin, 0).open(player));
+                (btn, event) -> new FactionListGui(0).open(player));
 
         player.openInventory(gui.Create());
     }

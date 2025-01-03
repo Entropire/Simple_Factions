@@ -1,6 +1,8 @@
 package me.entropire.simple_factions.commands;
 
-import me.entropire.simple_factions.FactionManager;
+import me.entropire.simple_factions.FactionEditor;
+import me.entropire.simple_factions.FactionInfo;
+import me.entropire.simple_factions.FactionInvitor;
 import me.entropire.simple_factions.Gui.CreateFactionGui;
 import me.entropire.simple_factions.Gui.FactionGui;
 import me.entropire.simple_factions.Gui.SimpleFactionGui;
@@ -20,15 +22,6 @@ import java.util.UUID;
 
 public class FactionCommand implements CommandExecutor, TabCompleter
 {
-    Simple_Factions simpleFactionsPlugin;
-    FactionManager factionManager;
-
-    public FactionCommand(Simple_Factions simpleFactionsPlugin)
-    {
-        factionManager = new FactionManager(simpleFactionsPlugin);
-        this.simpleFactionsPlugin = simpleFactionsPlugin;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args)
     {
@@ -40,21 +33,21 @@ public class FactionCommand implements CommandExecutor, TabCompleter
 
         if(args.length == 0)
         {
-            if(simpleFactionsPlugin.playerDatabase.hasFaction(player))
+            if(Simple_Factions.playerDatabase.hasFaction(player))
             {
-                int factionId = simpleFactionsPlugin.playerDatabase.getFactionId(player);
-                Faction faction = simpleFactionsPlugin.factionDatabase.getFactionDataById(factionId);
-                new FactionGui(simpleFactionsPlugin, faction).open(player);
+                int factionId = Simple_Factions.playerDatabase.getFactionId(player);
+                Faction faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
+                new FactionGui(faction).open(player);
                 return true;
             }
 
-            if(simpleFactionsPlugin.createFactions.containsKey(player.getUniqueId()))
+            if(Simple_Factions.createFactions.containsKey(player.getUniqueId()))
             {
-               new CreateFactionGui(simpleFactionsPlugin).open(player);
+               new CreateFactionGui().open(player);
             }
             else
             {
-                new SimpleFactionGui(simpleFactionsPlugin).open(player);
+                new SimpleFactionGui().open(player);
             }
 
             return false;
@@ -131,7 +124,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        factionManager.create(player, args[1]);
+        FactionEditor.create(player, args[1]);
     }
 
     private void handleNowCommand(String[] args, Player player) //should be removed in the released version
@@ -143,7 +136,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
         }
 
         for(int i = 0; i < Integer.parseInt(args[1]); i++){
-            factionManager.create(UUID.randomUUID(), "#$#$#$#$#$#$#$#$GHGHGHGHGHGHGH#$#$#$#$#$$#$#" + i);
+            FactionEditor.create(UUID.randomUUID(), "#$#$#$#$#$#$#$#$GHGHGHGHGHGHGH#$#$#$#$#$$#$#" + i);
         }
     }
 
@@ -156,20 +149,18 @@ public class FactionCommand implements CommandExecutor, TabCompleter
         }
 
         for(int i = 0; i < Integer.parseInt(args[1]); i++){
-            
-
 
         }
     }
 
     private void handleDeleteCommand(Player player)
     {
-        factionManager.delete(player);
+        FactionEditor.delete(player);
     }
 
     private void handleListCommand(Player player)
     {
-        factionManager.list(player);
+        FactionInfo.list(player);
     }
 
     private void handleMembersCommand(String[] args, Player player)
@@ -177,7 +168,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
         String factionName = null;
         if(args.length > 1) factionName = args[1];
 
-        factionManager.members(player, factionName);
+        FactionInfo.members(player, factionName);
     }
 
     private void  handleOwnerCommand(String[] args, Player player)
@@ -185,12 +176,12 @@ public class FactionCommand implements CommandExecutor, TabCompleter
         String factionName = null;
         if(args.length > 1) factionName = args[1];
 
-        factionManager.owner(player, factionName);
+        FactionInfo.owner(player, factionName);
     }
 
     private void handleLeaveCommand(Player player)
     {
-        factionManager.leave(player);
+        FactionEditor.leave(player);
     }
 
     private void handleKickCommand(String[] args, Player player)
@@ -200,7 +191,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        factionManager.kick(player, args[1]);
+        FactionEditor.kick(player, args[1]);
     }
 
     private void handleInviteCommand(String[] args, Player player)
@@ -211,7 +202,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        factionManager.invite(player, args[1]);
+        FactionInvitor.invite(player, args[1]);
     }
 
     private void handleJoinCommand(String[] args, Player player)
@@ -221,17 +212,17 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        factionManager.join(player, args[1]);
+        FactionInvitor.join(player, args[1]);
     }
 
     private void handleAcceptCommand(Player player)
     {
-        factionManager.accept(player);
+        FactionInvitor.accept(player);
     }
 
     private void handleDeclineCommand(Player player)
     {
-        factionManager.decline(player);
+        FactionInvitor.decline(player);
     }
 
     private void handleModifyCommand(String[] args, Player player){
@@ -271,7 +262,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        factionManager.modifyName(player, args[2]);
+        FactionEditor.modifyName(player, args[2]);
     }
 
     private void handleModifyColorCommand(String[] args, Player player)
@@ -282,7 +273,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        factionManager.modifyColor(player, args[2]);
+        FactionEditor.modifyColor(player, args[2]);
     }
 
     private void handleModifyOwnerCommand(String[] args, Player player)
@@ -293,7 +284,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return;
         }
 
-        factionManager.modifyOwner(player, args[2]);
+        FactionEditor.modifyOwner(player, args[2]);
     }
 
     private void handleException(Exception ex, Player player, String message)
@@ -310,6 +301,8 @@ public class FactionCommand implements CommandExecutor, TabCompleter
         {
             return List.of();
         }
+
+        Player player = (Player)sender;
 
         List<String> suggestions = new ArrayList<>();
 
@@ -330,11 +323,30 @@ public class FactionCommand implements CommandExecutor, TabCompleter
                 suggestions.add("modify");
                 break;
             case 2:
-                if(args[0].toLowerCase().contains("modify"))
+                switch(args[0].toLowerCase())
                 {
-                    suggestions.add("name");
-                    suggestions.add("color");
-                    suggestions.add("owner");
+                    case "kick":
+                        if(Simple_Factions.playerDatabase.hasFaction(player))
+                        {
+                            int factionId = Simple_Factions.playerDatabase.getFactionId(player);
+                            Faction faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
+
+                            suggestions.addAll(faction.getMembers());
+                        }
+                        break;
+                    case "invite":
+                        player.sendMessage("you made it");
+                        suggestions.addAll(Simple_Factions.playerDatabase.getPlayerWithNoFaction());
+                        break;
+                    case "join":
+                        suggestions.addAll(Simple_Factions.factionDatabase.getFactions());
+                        break;
+                    case "modify":
+                        player.sendMessage("you made it to modify good job");
+                        suggestions.add("name");
+                        suggestions.add("color");
+                        suggestions.add("owner");
+                        break;
                 }
                 break;
         }
