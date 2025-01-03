@@ -114,7 +114,7 @@ public class FactionInvitor
 
             if(sender != null)
             {
-                changePlayerDisplayName(sender, faction.getColor() + "[" + faction.getName() + "] " + player.getName());
+                changePlayerDisplayName(sender, faction.getColor() + "[" + faction.getName() + "] " + sender.getName());
                 sender.sendMessage(GREEN + "You have joined the faction " + faction.getName());
             }
             player.sendMessage(GREEN + senderName + " is now part of your faction.");
