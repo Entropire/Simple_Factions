@@ -18,7 +18,6 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class FactionCommand implements CommandExecutor, TabCompleter
 {
@@ -91,12 +90,6 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             case "modify":
                 handleModifyCommand(args, player);
                 break;
-            case "now":
-                handleNowCommand(args, player); //should be removed in the released version
-                break;
-            case "add":
-                handleAddCommand(args, player); //should be removed in the released version
-                break;
             default:
                 player.sendMessage("Available commands for factions are");
                 player.sendMessage("/faction create");
@@ -125,32 +118,6 @@ public class FactionCommand implements CommandExecutor, TabCompleter
         }
 
         FactionEditor.create(player, args[1]);
-    }
-
-    private void handleNowCommand(String[] args, Player player) //should be removed in the released version
-    {
-        if (args.length < 2)
-        {
-            player.sendMessage(ChatColor.RED + "/faction create [amount].");
-            return;
-        }
-
-        for(int i = 0; i < Integer.parseInt(args[1]); i++){
-            FactionEditor.create(UUID.randomUUID(), "#$#$#$#$#$#$#$#$GHGHGHGHGHGHGH#$#$#$#$#$$#$#" + i);
-        }
-    }
-
-    private void handleAddCommand(String[] args, Player player)//should be removed in the released version
-    {
-        if (args.length < 2)
-        {
-            player.sendMessage(ChatColor.RED + "/faction create [amount].");
-            return;
-        }
-
-        for(int i = 0; i < Integer.parseInt(args[1]); i++){
-
-        }
     }
 
     private void handleDeleteCommand(Player player)
@@ -330,8 +297,10 @@ public class FactionCommand implements CommandExecutor, TabCompleter
                         {
                             int factionId = Simple_Factions.playerDatabase.getFactionId(player);
                             Faction faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
+                            ArrayList<String> members = faction.getMembers();
+                            members.remove(player.getName());
 
-                            suggestions.addAll(faction.getMembers());
+                            suggestions.addAll(members);
                         }
                         break;
                     case "invite":

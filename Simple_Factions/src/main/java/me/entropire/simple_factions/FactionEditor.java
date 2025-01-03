@@ -51,16 +51,6 @@ public class FactionEditor
         player.sendMessage(GREEN + "New faction " + faction.getName() + " created.");
     }
 
-    public static void create(UUID player, String factionName)//may be removed in the released version
-    {
-        ArrayList<String> members = new ArrayList<>();
-        members.add(player.toString());
-        Faction faction = new Faction(0, factionName, WHITE, player, members);
-
-        Simple_Factions.factionDatabase.addFaction(faction);
-        Simple_Factions.playerDatabase.updateFactionWithPlayerName(player.toString(), Simple_Factions.plugin.factionDatabase.getFactionDataByName(factionName).getId());
-    }
-
     public static void kick(Player player, String playerName)
     {
         if(!Simple_Factions.playerDatabase.hasFaction(player))

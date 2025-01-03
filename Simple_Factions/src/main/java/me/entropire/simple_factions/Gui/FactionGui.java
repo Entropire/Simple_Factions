@@ -1,5 +1,6 @@
 package me.entropire.simple_factions.Gui;
 
+import me.entropire.simple_factions.FactionEditor;
 import me.entropire.simple_factions.Simple_Factions;
 import me.entropire.simple_factions.objects.Colors;
 import me.entropire.simple_factions.objects.Faction;
@@ -60,12 +61,21 @@ public class FactionGui extends BaseGui
 
         if(faction.getOwner().equals(player.getUniqueId()))
         {
-            gui.addButton(18, "Invite Player", Material.PAPER,  "", (btn, event) -> {});
-            gui.addButton(26, "Delete Faction", Material.RED_WOOL,  "", (btn, event) -> {});
+            gui.addButton(18, "Invite Player", Material.PAPER,  "", (btn, event) -> {
+
+            });
+
+            gui.addButton(26, "Delete Faction", Material.RED_WOOL,  "", (btn, event) -> {
+                FactionEditor.delete(player);
+                player.closeInventory();
+            });
         }
         else
         {
-            gui.addButton(26, "Leave Faction", Material.RED_WOOL,  "", (btn, event) -> {});
+            gui.addButton(26, "Leave Faction", Material.RED_WOOL,  "", (btn, event) -> {
+                FactionEditor.leave(player);
+                player.closeInventory();
+            });
         }
 
         player.openInventory(gui.Create());
