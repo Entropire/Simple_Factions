@@ -8,7 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FactionInfoGui extends BaseGui
 {
@@ -38,18 +38,15 @@ public class FactionInfoGui extends BaseGui
         {
             ownerName = owner.getName();
         }
-        ArrayList<String> members = faction.getMembers();
-        ArrayList<String> top10Members = faction.getMembers();
+        List<String> members = faction.getMembers();
 
-        for(int i = 0; i < 10; i++)
-        {
-            top10Members.add(members.get(i));
+        if (members.size() > 10) {
+            members = members.subList(0, 10);
         }
-
 
         gui.addButton(2, "Faction name", Material.NAME_TAG, factionName, (btn, event) -> {});
         gui.addButton(4, "Faction owner", Material.PLAYER_HEAD, ownerName, (btn, event) -> {});
-        gui.addButton(6, "Faction members", Material.OAK_SIGN, top10Members, (btn, event) -> {});
+        gui.addButton(6, "Faction members", Material.OAK_SIGN, members,(btn, event) -> {});
         gui.addButton(21, "Join", Material.GREEN_WOOL, "Request to join this faction.", (btn, event) -> {
             String EventFactionName = event.getView().getTitle().replace("Info of ", "");
             FactionInvitor.join(player, EventFactionName);
