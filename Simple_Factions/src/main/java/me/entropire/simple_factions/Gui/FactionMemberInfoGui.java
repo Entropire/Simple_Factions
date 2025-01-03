@@ -33,11 +33,13 @@ public class FactionMemberInfoGui extends BaseGui
             gui.addButton(11, "Make owner", Material.PAPER, "Make this member the owner of the faction",
                     (btn, event) -> {
                         FactionEditor.modifyOwner(player, memberName);
+                        player.closeInventory();
                     });
 
             gui.addButton(15, "Kick member", Material.RED_WOOL, "Kick player from the faction",
                     (btn, event) -> {
                         FactionEditor.kick(player, memberName);
+                        player.closeInventory();
                     });
         }
 
