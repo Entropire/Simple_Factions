@@ -62,7 +62,7 @@ public class FactionListGui extends BaseGui
             gui.addButton(45, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
         }
 
-        gui.addButton(49, "Leave", Material.RED_WOOL, "Go back to the main menu.",
+        gui.addButton(49, "Return", Material.RED_WOOL, "Go back to the main menu.",
                 (btn, event) -> new SimpleFactionGui().open(player));
 
         gui.addButton(46, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});

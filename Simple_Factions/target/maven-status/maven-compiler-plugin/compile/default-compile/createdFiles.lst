@@ -15,6 +15,7 @@ me\entropire\simple_factions\commands\FactionCommand.class
 me\entropire\simple_factions\events\OnJoin.class
 me\entropire\simple_factions\objects\Faction.class
 me\entropire\simple_factions\Gui\FactionMemberInfoGui.class
+me\entropire\simple_factions\Gui\FactionMembersListGui.class
 me\entropire\simple_factions\Gui\Gui.class
 me\entropire\simple_factions\FactionInvitor.class
 me\entropire\simple_factions\events\Message.class
@@ -28,5 +29,4 @@ me\entropire\simple_factions\objects\Colors.class
 me\entropire\simple_factions\objects\Invite.class
 me\entropire\simple_factions\Gui\Button.class
 me\entropire\simple_factions\FactionEditor.class
-me\entropire\simple_factions\Gui\FactionMembersList.class
 me\entropire\simple_factions\Gui\FactionInfoGui.class

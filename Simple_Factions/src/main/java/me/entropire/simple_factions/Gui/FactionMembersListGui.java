@@ -7,11 +7,11 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class FactionMembersList extends BaseGui
+public class FactionMembersListGui extends BaseGui
 {
     private int pageNumber;
 
-    public FactionMembersList(int pageNumber)
+    public FactionMembersListGui(int pageNumber)
     {
         this.pageNumber = pageNumber;
     }
@@ -69,7 +69,7 @@ public class FactionMembersList extends BaseGui
             gui.addButton(45, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});
         }
 
-        gui.addButton(49, "Leave", Material.RED_WOOL, "Go back to the main menu.",
+        gui.addButton(49, "Return", Material.RED_WOOL, "Go back to the main menu.",
                 (btn, event) -> new FactionGui(faction).open(player));
 
         gui.addButton(46, "", Material.GRAY_STAINED_GLASS_PANE, "", (btn, event) -> {});

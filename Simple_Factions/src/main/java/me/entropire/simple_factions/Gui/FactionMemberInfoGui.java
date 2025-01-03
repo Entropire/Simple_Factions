@@ -1,11 +1,8 @@
 package me.entropire.simple_factions.Gui;
 
-import me.entropire.simple_factions.Simple_Factions;
 import me.entropire.simple_factions.objects.Faction;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
 
 public class FactionMemberInfoGui extends BaseGui
 {
@@ -24,6 +21,11 @@ public class FactionMemberInfoGui extends BaseGui
         Gui gui = new Gui("Info of " + memberName, GuiSize.Small);
 
         gui.addButton(13, memberName, Material.PLAYER_HEAD, "", null);
+
+        gui.addButton(26, "Return", Material.RED_WOOL, "",
+                (btn, event) -> {
+                    new FactionMembersListGui(0).open(player);
+                });
 
         if(faction.getOwner().equals(player.getUniqueId()))
         {

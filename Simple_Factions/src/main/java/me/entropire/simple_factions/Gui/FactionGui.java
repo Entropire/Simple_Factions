@@ -3,7 +3,6 @@ package me.entropire.simple_factions.Gui;
 import me.entropire.simple_factions.Simple_Factions;
 import me.entropire.simple_factions.objects.Colors;
 import me.entropire.simple_factions.objects.Faction;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -44,7 +43,7 @@ public class FactionGui extends BaseGui
                 (btn, event) -> {
             if (faction.getOwner().equals(player.getUniqueId()))
             {
-                new FactionMembersList(0).open(player);
+                new FactionMembersListGui(0).open(player);
             }
         });
 
@@ -56,7 +55,7 @@ public class FactionGui extends BaseGui
 
         gui.addButton(16, "Members", Material.OAK_SIGN, members,
                 (btn, event) -> {
-            new FactionMembersList(0).open(player);
+            new FactionMembersListGui(0).open(player);
         });
 
         if(faction.getOwner().equals(player.getUniqueId()))
