@@ -16,7 +16,7 @@ public class FactionInvitor
     {
         if(!Simple_Factions.playerDatabase.hasFaction(player))
         {
-            player.sendMessage(RED + "You must be in a faction to invite some wane");
+            player.sendMessage(RED + "You must be in a faction to preform this action!");
             return;
         }
 
@@ -30,20 +30,24 @@ public class FactionInvitor
         }
 
         Player invitedPlayer = Bukkit.getServer().getPlayer(invitedPlayerName);
-        if (invitedPlayer == null || !invitedPlayer.isOnline()) {
+        if (invitedPlayer == null || !invitedPlayer.isOnline()) 
+        {
             player.sendMessage(ChatColor.RED + (invitedPlayer == null ? invitedPlayerName + " is not a player." : invitedPlayerName + " is not online."));
             return;
         }
-        if(Simple_Factions.playerDatabase.hasFaction(invitedPlayer))
+        
+        if (Simple_Factions.playerDatabase.hasFaction(invitedPlayer))
         {
             player.sendMessage(RED  + invitedPlayerName + " is already in a faction." );
             return;
         }
+        
         if(Simple_Factions.invites.containsKey(invitedPlayer.getUniqueId()))
         {
             player.sendMessage(RED  + invitedPlayerName + " already is invited to a faction.");
             return;
         }
+        
         Invite invite = new Invite(invitedPlayer.getUniqueId(), factionId, System.currentTimeMillis() + 30000);
         Simple_Factions.invites.put(invitedPlayer.getUniqueId(), invite);
 

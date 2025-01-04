@@ -90,13 +90,11 @@ public class FactionEditor
         }
     }
 
-    // I was here
-
     public static void leave(Player player)
     {
         if(!Simple_Factions.playerDatabase.hasFaction(player))
         {
-            player.sendMessage(RED + "You are not in a faction.");
+            player.sendMessage(RED + "You must be in a faction to preform this action!");
             return;
         }
 
@@ -104,7 +102,7 @@ public class FactionEditor
         Faction factionData = Simple_Factions.factionDatabase.getFactionDataById(factionId);
         if(factionData.getOwner().equals(player.getUniqueId()))
         {
-            player.sendMessage(RED + "As owner you van not leave the faction.");
+            player.sendMessage(RED + "You can not preform this action as owner of the faction!");
             return;
         }
 
@@ -112,14 +110,14 @@ public class FactionEditor
         Simple_Factions.playerDatabase.updateFactionWithPlayerName(player.getName(), 0);
 
         changePlayerDisplayName(player, player.getName());
-        player.sendMessage(GREEN + "You left the faction: " + factionData.getName());
+        player.sendMessage(AQUA + "You have left your faction");
     }
 
     public static void delete(Player player)
     {
         if(!Simple_Factions.playerDatabase.hasFaction(player))
         {
-            player.sendMessage(RED + "You are not in a faction.");
+            player.sendMessage(RED + "You must be in a faction to preform this action!");
             return;
         }
 
@@ -128,13 +126,13 @@ public class FactionEditor
 
         if (faction == null)
         {
-            player.sendMessage(RED + "Faction data not found.");
+            player.sendMessage(RED + "Your faction data has not been found!");
             return;
         }
 
         if(!faction.getOwner().equals(player.getUniqueId()))
         {
-            player.sendMessage(RED + "Only the owner of a faction can delete it.");
+            player.sendMessage(RED + "You must be the owner of the faction to preform this action!");
             return;
         }
 
@@ -148,19 +146,19 @@ public class FactionEditor
             if(member != null)
             {
                 changePlayerDisplayName(member, member.getName());
-                if(member.isOnline()) member.sendMessage(YELLOW + "Your faction has been deleted.");
+                if(member.isOnline()) member.sendMessage(AQUA + "You have been kicked from your faction");
             }
         }
         Simple_Factions.factionDatabase.deleteFaction(factionId);
 
-        player.sendMessage(RED + "You have delete your faction " + faction.getName());
+        player.sendMessage(AQUA + "You have deleted your faction");
     }
 
     public static void modifyName(Player player, String newFactionName)
     {
         if(!Simple_Factions.playerDatabase.hasFaction(player))
         {
-            player.sendMessage(RED + "You are not in a faction.");
+            player.sendMessage(RED + "You must be in a faction to preform this action!");
             return;
         }
 
@@ -168,17 +166,17 @@ public class FactionEditor
         Faction factionData = Simple_Factions.factionDatabase.getFactionDataById(factionId);
         if(!factionData.getOwner().equals(player.getUniqueId()))
         {
-            player.sendMessage(RED + "Only the owner can modify a faction.");
+            player.sendMessage(RED + "You must be the owner of the faction to preform this action!");
             return;
         }
 
         if(Simple_Factions.factionDatabase.factionExistsByName(newFactionName)){
-            player.sendMessage(RED + "There already is a faction with the name " + newFactionName + ".");
+            player.sendMessage(RED + "the name ''" + newFactionName + "' is already in use by another faction!");
             return;
         }
 
         Simple_Factions.factionDatabase.updateFactionName(factionId, newFactionName);
-        player.sendMessage(GREEN + "Changed faction name from " + factionData.getName() + " to " + newFactionName);
+        player.sendMessage(AQUA + "You have changed your faction name to " + newFactionName);
         factionData = Simple_Factions.factionDatabase.getFactionDataById(factionId);
 
         for(int i = 0; i < factionData.getMembers().size(); i++)
@@ -196,15 +194,12 @@ public class FactionEditor
     {
         if (!Simple_Factions.playerDatabase.hasFaction(player))
         {
-            player.sendMessage(RED + "You must be in a faction to modify it.");
+            player.sendMessage(RED + "You must be in a faction to preform this action!");
             return;
         }
+       
         if(!Colors.colorNameExists(newColor)){
-            player.sendMessage(RED + "Not a valid color possible options are:");
-            player.sendMessage("black, red, aqua, blue, dark_aqua");
-            player.sendMessage("dark_blue, dark_gray, dark_green");
-            player.sendMessage("dark_purple, dark_red, gold, gray");
-            player.sendMessage("green, light_purple, white, yellow");
+            player.sendMessage(RED + "(colorName) is not a valid color!");
             return;
         }
 
@@ -213,13 +208,12 @@ public class FactionEditor
 
         if(!faction.getOwner().equals(player.getUniqueId()))
         {
-            player.sendMessage(RED + "Only the owner can modify a faction.");
+            player.sendMessage(RED + "You must be the owner of the faction to preform this action!");
             return;
         }
 
         Simple_Factions.factionDatabase.updateFactionColor(factionId, newColor);
-        player.sendMessage(GREEN + "Changed faction color from " + faction.getColor() + Colors.getColorNameWithChatColor(faction.getColor())
-                + GREEN + " to " + Colors.getChatColorWithColorName(newColor) + newColor);
+        player.sendMessage(AQUA + "You have changed your faction color to (factionColor) " + Colors.getMaterialWithChatColor(newColor) + newColor);
         faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
 
         for(int i = 0; i < faction.getMembers().size(); i++)
@@ -237,7 +231,7 @@ public class FactionEditor
     {
         if (!Simple_Factions.playerDatabase.hasFaction(player))
         {
-            player.sendMessage(RED + "You must be in a faction to modify it.");
+            player.sendMessage(RED + "You must be in a faction to preform this action!");
             return;
         }
 
@@ -246,17 +240,17 @@ public class FactionEditor
 
         if(!faction.getOwner().equals(player.getUniqueId()))
         {
-            player.sendMessage(RED + "Only the owner can modify a faction.");
+            player.sendMessage(RED + "You must be the owner of the faction to preform this action!");
             return;
         }
         if(!faction.getMembers().contains(newOwnerName)){
-            player.sendMessage(RED + "Player must be in your faction to make him the owner.");
+            player.sendMessage(RED + "You can only promote members of your faction to owner!");
             return;
         }
 
         String newOwnerUUID = Simple_Factions.playerDatabase.getPlayerUUID(newOwnerName).toString();
         Simple_Factions.factionDatabase.updateFactionOwner(factionId, newOwnerUUID);
-        player.sendMessage(GREEN + "Change the owner of " + faction.getName() + " to " + newOwnerName);
+        player.sendMessage(AQUA + "You have promoted " + newOwnerName + " to owner ");
     }
 
     public static void DeleteFactionCreation(Player player)

@@ -21,32 +21,32 @@ public class FactionInfo
 
     public static void members(Player player, String factionName)
     {
-        ArrayList<String> members;
+        if(!Simple_Factions.playerDatabase.hasFaction(player) && factionName == null)
+        {
+            player.sendMessage(RED + "Command usage /faction members [Faction name]");
+            return;            
+        }
+       
+        if(!Simple_Factions.factionDatabase.factionExistsByName(factionName))
+        {
+            player.sendMessage(RED + "There is no faction with the name " + factionName);
+            return;
+        } 
+        
+        Faction faction;
+        
         if(factionName == null)
         {
-            if(Simple_Factions.playerDatabase.hasFaction(player))
-            {
-                int factionId = Simple_Factions.playerDatabase.getFactionId(player);
-                members = Simple_Factions.factionDatabase.getFactionDataById(factionId).getMembers();
-            }
-            else
-            {
-                player.sendMessage(RED + "You are not in a faction.");
-                return;
-            }
-        }
-        else if  (Simple_Factions.factionDatabase.factionExistsByName(factionName))
-        {
-            members = Simple_Factions.factionDatabase.getFactionDataByName(factionName).getMembers();
+            int factionId = Simple_Factions.playerDatabase.getFactionId(player);
+            faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
         }
         else
         {
-            player.sendMessage(RED + "faction " + factionName + " does not  exists.");
-            return;
+            faction = Simple_Factions.factionDatabase.getFactionDataByName(factionName);
         }
-
+        
         player.sendMessage("Members: ");
-        for (String member : members)
+        for (String member : faction.getMembers())
         {
             player.sendMessage(" -" + member);
         }
@@ -54,32 +54,32 @@ public class FactionInfo
 
     public static void owner(Player player, String factionName)
     {
+        if(Simple_Factions.playerDatabase.hasFaction(player) && factionName == null)
+        {
+            player.sendMessage(RED + "Command usage /faction owner [Faction name]");
+            return;    
+        }
+        
+        if(Simple_Factions.factionDatabase.factionExistsByName(factionName))
+        {
+            player.sendMessage(RED + "There is no faction with the name " + factionName);
+            return;
+        }
+    
         Faction faction;
+        
         if(factionName == null)
         {
-            if(Simple_Factions.playerDatabase.hasFaction(player))
-            {
-                int factionId = Simple_Factions.playerDatabase.getFactionId(player);
-                faction= Simple_Factions.factionDatabase.getFactionDataById(factionId);
-            }
-            else
-            {
-                player.sendMessage(RED + "you are not in a faction");
-                return;
-            }
+            int factionId = Simple_Factions.playerDatabase.getFactionId(player);
+            faction= Simple_Factions.factionDatabase.getFactionDataById(factionId);
         }
-        else if  (Simple_Factions.factionDatabase.factionExistsByName(factionName))
+        else 
         {
             faction = Simple_Factions.factionDatabase.getFactionDataByName(factionName);
-        }
-        else
-        {
-            player.sendMessage(RED + "faction " + factionName + " does not  exists.");
-            return;
         }
 
         String ownerUUID = faction.getOwner().toString();
         String ownerName = Simple_Factions.playerDatabase.getPlayerName(ownerUUID);
-        player.sendMessage("Owner of " + faction.getName() + ": " + ownerName);
+        player.sendMessage(ChatColor.AQUA + "The owner of " + faction.getName() + " is " + ownerName);
     }
 }

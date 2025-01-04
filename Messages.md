@@ -3,7 +3,14 @@ FactionEditor - line 93
 - Changed chat: "Changed chat to (Chat type)"
 - Created a new faction: "New faction (factionName) created."
 - Kicked member out of a faction: "You have kicked (playerName) out of your faction"
-- Player is kicked from his faction: "You have been kicked from your faction" 
+- Player is kicked from his faction: "You have been kicked from your faction"
+- Player leaves faction: "You have left your faction"
+- Player deleted there faction: "You have deleted your faction"
+- Player kicked becous faction has been deleted: "You have been kicked from your faction" 
+- Player changed faction name: "You have changed your faction name to (factionName)"
+- Player changed faction color: "You have changed your faction color to (factionColor)"
+- Player changed faction owner: "You have promoted (memberName) to owner"
+- Player owner of faction: "The owner of (factionName) is (ownerName)"
 
 ## [Waring] Yellow 
 
@@ -18,8 +25,10 @@ FactionEditor - line 93
 - Wrong command usage /faction modify name: "Command usage /faction modify name [New faction name]"
 - Wrong command usage /faction modify color: "Command usage /faction modify name [Color name]"
 - Wrong command usage /faction modify owner: "Command usage /faction modify owner [Member name]"
-
 - Faction name is already in use: "The name (factionName) is already in use by another faction!"
+- Wrong command usage /faction members: "Command usage /faction members [Faction name]"
+- There is no faction with the given factionName: "There is no faction with the name [Faction name]"
+- Wrong command usage /faction owner: "Command usage /faction owner [Faction name]"
 
 ## [Error] Red
 
@@ -30,6 +39,10 @@ FactionEditor - line 93
 - Player is not the owner of the faction: "You must be the owner of the faction to preform this action!"
 - Player is not a member of the faction: "This player is not a part of your faction!"
 - When the owner is trying to kick him self: "You can not kick the owner from the faction!"
+- When owner tries to make a nonmember owner of the fation: "You can only promote members of your faction to owner!"
+- Faction data not fount: "Your faction data has not been found!" 
+- Faction name is already taken: "the name (factionName) is already in use by another faction!"
+- Color not valid: "(colorName) is not a valid color!"
 
 ### [Database Errors]
 - Failed to connect to database: "Failed to connect to the dataBase: (errorMessage)"
