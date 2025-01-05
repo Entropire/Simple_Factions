@@ -13,23 +13,16 @@ import java.util.ArrayList;
 
 public class Message implements Listener
 {
-    private final Simple_Factions simpleFactionsPlugin;
-
-    public Message(Simple_Factions simpleFactionsPlugin)
-    {
-        this.simpleFactionsPlugin = simpleFactionsPlugin;
-    }
-
     @EventHandler
     public void MessageSend(AsyncPlayerChatEvent e)
     {
         Player player = e.getPlayer();
-        if(simpleFactionsPlugin.playerDatabase.hasFaction(player))
+        if(Simple_Factions.playerDatabase.hasFaction(player))
         {
             String message = e.getMessage();
-            int factionId = simpleFactionsPlugin.playerDatabase.getFactionId(player);
-            Faction faction = simpleFactionsPlugin.factionDatabase.getFactionDataById(factionId);
-            switch (simpleFactionsPlugin.playerDatabase.getChat(player.getUniqueId()).toLowerCase()){
+            int factionId = Simple_Factions.playerDatabase.getFactionId(player);
+            Faction faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
+            switch (Simple_Factions.playerDatabase.getChat(player.getUniqueId()).toLowerCase()){
                 case "public":
                     e.setFormat(faction.getColor() + "[" + faction.getName() + "] " + player.getName() + ": " + ChatColor.GRAY + message);
                     break;

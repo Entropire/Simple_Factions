@@ -19,7 +19,8 @@ public class SetFactionColorGui extends BaseGui
         List<Integer> slots = Arrays.asList(1,2,3,4,5,6,7,10,11,12,13,14,15,16,21,23);
         for (String colorName : Colors.getColorNames())
         {
-            gui.addButton(slots.get(i), Colors.getChatColorWithColorName(colorName) + colorName, Colors.getMaterialWithColorName(colorName), "" , (btn, event) -> {
+            gui.addButton(slots.get(i), Colors.getChatColorWithColorName(colorName) + colorName, Colors.getMaterialWithColorName(colorName), "" ,
+                    (btn, event) -> {
                 String eventColorName = btn.getItemMeta().getDisplayName();
                 ChatColor color = Colors.getChatColorWithColorName(ChatColor.stripColor(eventColorName));
                 Simple_Factions.createFactions.get(player.getUniqueId()).setColor(color);

@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Button extends ItemStack
 {
-    private ButtonPressAction action;
+    private final ButtonPressAction action;
 
     public Button(Material material, ButtonPressAction action)
     {
@@ -20,15 +20,5 @@ public class Button extends ItemStack
         {
             action.onPress(this, event);
         }
-    }
-
-    public ButtonPressAction getAction()
-    {
-        return action;
-    }
-
-    public void setAction(ButtonPressAction action)
-    {
-        this.action = action;
     }
 }

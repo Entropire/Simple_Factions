@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FactionInfoGui extends BaseGui
 {
-    private String factionName;
+    private final String factionName;
 
     public FactionInfoGui(String factionName)
     {
@@ -26,7 +26,7 @@ public class FactionInfoGui extends BaseGui
 
         Faction faction = Simple_Factions.factionDatabase.getFactionDataByName(factionName);
 
-        if(faction == null) { player.sendMessage(ChatColor.RED + "Somthing whent rong while getting the factions information."); return; }
+        if(faction == null) { player.sendMessage(ChatColor.RED + "Something went wrong while getting the factions information."); return; }
 
         Player owner =  Bukkit.getPlayer(faction.getOwner());
         String ownerName;

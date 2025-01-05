@@ -25,9 +25,7 @@ public class PlayerInviteGui extends BaseGui
                 });
 
         gui.addButton(15, "Return", Material.RED_WOOL, "",
-                (btn, event) -> {
-                    new PlayerListGui(0).open(player);
-                });
+                (btn, event) -> new PlayerListGui(0).open(player));
 
         player.openInventory(gui.create());
     }

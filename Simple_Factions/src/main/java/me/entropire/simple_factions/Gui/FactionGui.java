@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class FactionGui extends BaseGui
 {
-    private Faction faction;
+    private final Faction faction;
 
     public FactionGui(Faction faction)
     {
@@ -55,24 +55,23 @@ public class FactionGui extends BaseGui
         }
 
         gui.addButton(16, "Members", Material.OAK_SIGN, members,
-                (btn, event) -> {
-            new FactionMembersListGui(0).open(player);
-        });
+                (btn, event) -> new FactionMembersListGui(0).open(player));
 
         if(faction.getOwner().equals(player.getUniqueId()))
         {
-            gui.addButton(18, "Invite Player", Material.PAPER,  "", (btn, event) -> {
-                new PlayerListGui(0).open(player);
-            });
+            gui.addButton(18, "Invite Player", Material.PAPER,  "",
+                    (btn, event) -> new PlayerListGui(0).open(player));
 
-            gui.addButton(26, "Delete Faction", Material.RED_WOOL,  "", (btn, event) -> {
+            gui.addButton(26, "Delete Faction", Material.RED_WOOL,  "",
+                    (btn, event) -> {
                 FactionEditor.delete(player);
                 player.closeInventory();
             });
         }
         else
         {
-            gui.addButton(26, "Leave Faction", Material.RED_WOOL,  "", (btn, event) -> {
+            gui.addButton(26, "Leave Faction", Material.RED_WOOL,  "",
+                    (btn, event) -> {
                 FactionEditor.leave(player);
                 player.closeInventory();
             });

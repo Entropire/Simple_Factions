@@ -14,9 +14,9 @@ enum GuiSize {
 }
 public class Gui implements InventoryHolder
 {
-    private String name;
-    private int size;
-    private Map<Integer, Button> buttons = new HashMap<>();
+    private final String name;
+    private final int size;
+    private final Map<Integer, Button> buttons = new HashMap<>();
 
     public Gui(String name, GuiSize size)
     {

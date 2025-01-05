@@ -14,12 +14,12 @@ public class FactionEditor
 {
     public static void create(Player player, String factionName)
     {
-        if(Simple_Factions.plugin.playerDatabase.hasFaction(player))
+        if(Simple_Factions.playerDatabase.hasFaction(player))
         {
             player.sendMessage(RED + "You are already in a faction.");
             return;
         }
-        if(Simple_Factions.plugin.factionDatabase.factionExistsByName(factionName))
+        if(Simple_Factions.factionDatabase.factionExistsByName(factionName))
         {
             player.sendMessage(RED + "The name " + factionName + " is already in use by another faction!");
             return;
@@ -29,8 +29,8 @@ public class FactionEditor
         members.add(player.getName());
         Faction faction = new Faction(0, factionName, WHITE, player.getUniqueId(), members);
 
-        Simple_Factions.plugin.factionDatabase.addFaction(faction);
-        Simple_Factions.plugin.playerDatabase.updateFactionWithPlayerName(player.getName(), Simple_Factions.plugin.factionDatabase.getFactionDataByName(factionName).getId());
+        Simple_Factions.factionDatabase.addFaction(faction);
+        Simple_Factions.playerDatabase.updateFactionWithPlayerName(player.getName(), Simple_Factions.factionDatabase.getFactionDataByName(factionName).getId());
 
         changePlayerDisplayName(player, faction.getColor() + "[" + faction.getName() + "] " + player.getName());
 
@@ -39,10 +39,10 @@ public class FactionEditor
 
     public static void create(Player player)
     {
-        Faction faction = Simple_Factions.plugin.createFactions.get(player.getUniqueId());
+        Faction faction = Simple_Factions.createFactions.get(player.getUniqueId());
 
         Simple_Factions.factionDatabase.addFaction(faction);
-        Simple_Factions.playerDatabase.updateFactionWithPlayerName(player.getName(), Simple_Factions.plugin.factionDatabase.getFactionDataByName(faction.getName()).getId());
+        Simple_Factions.playerDatabase.updateFactionWithPlayerName(player.getName(), Simple_Factions.factionDatabase.getFactionDataByName(faction.getName()).getId());
 
         Simple_Factions.createFactions.remove(player.getUniqueId());
 
@@ -61,7 +61,6 @@ public class FactionEditor
 
         int factionId = Simple_Factions.playerDatabase.getFactionId(player);
         Faction factionData = Simple_Factions.factionDatabase.getFactionDataById(factionId);
-
         if(!factionData.getOwner().equals(player.getUniqueId()))
         {
             player.sendMessage(RED + "You must be the owner of the faction to preform this action!");
@@ -213,7 +212,7 @@ public class FactionEditor
         }
 
         Simple_Factions.factionDatabase.updateFactionColor(factionId, newColor);
-        player.sendMessage(AQUA + "You have changed your faction color to (factionColor) " + Colors.getMaterialWithChatColor(newColor) + newColor);
+        player.sendMessage(AQUA + "You have changed your faction color to (factionColor) " + Colors.getChatColorWithColorName(newColor) + newColor);
         faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
 
         for(int i = 0; i < faction.getMembers().size(); i++)
@@ -250,7 +249,7 @@ public class FactionEditor
 
         String newOwnerUUID = Simple_Factions.playerDatabase.getPlayerUUID(newOwnerName).toString();
         Simple_Factions.factionDatabase.updateFactionOwner(factionId, newOwnerUUID);
-        player.sendMessage(AQUA + "You have promoted " + newOwnerName + " to owner ");
+        player.sendMessage(AQUA + "You have promoted " + newOwnerName + " to owner");
     }
 
     public static void DeleteFactionCreation(Player player)

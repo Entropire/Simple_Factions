@@ -18,21 +18,9 @@ public class Colors
         return i != -1 ? Colors.colorName.get(i) : null;
     }
 
-    public static String getColorNameWithMaterial(Material material)
-    {
-        int i = Colors.material.indexOf(material);
-        return i != -1 ? Colors.colorName.get(i) : null;
-    }
-
     public static ChatColor getChatColorWithColorName(String colorName)
     {
         int i = Colors.colorName.indexOf(colorName.toLowerCase());
-        return i != -1 ? Colors.chatColor.get(i) : null;
-    }
-
-    public static ChatColor getChatColorWithMaterial(Material material)
-    {
-        int i = Colors.material.indexOf(material);
         return i != -1 ? Colors.chatColor.get(i) : null;
     }
 

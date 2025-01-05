@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Faction {
-    private int id;
+    private final int id;
     private String name;
     private ChatColor color;
-    private UUID owner;
-    private ArrayList<String> members;
+    private final UUID owner;
+    private final  ArrayList<String> members;
 
     public Faction(int id, String name, ChatColor color, UUID owner, ArrayList<String> members) {
         this.id = id;

@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 
 public class FactionMemberInfoGui extends BaseGui
 {
-    private String memberName;
-    private Faction faction;
+    private final String memberName;
+    private final Faction faction;
 
     public FactionMemberInfoGui(String memberName, Faction faction)
     {
@@ -24,9 +24,7 @@ public class FactionMemberInfoGui extends BaseGui
         gui.addButton(13, memberName, Material.PLAYER_HEAD, "", null);
 
         gui.addButton(26, "Return", Material.RED_WOOL, "",
-                (btn, event) -> {
-                    new FactionMembersListGui(0).open(player);
-                });
+                (btn, event) -> new FactionMembersListGui(0).open(player));
 
         if(faction.getOwner().equals(player.getUniqueId()))
         {

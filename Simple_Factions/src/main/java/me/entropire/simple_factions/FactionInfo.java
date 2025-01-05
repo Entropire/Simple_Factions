@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-import static org.bukkit.ChatColor.RED;
+import static org.bukkit.ChatColor.*;
 
 public class FactionInfo
 {
@@ -80,6 +80,6 @@ public class FactionInfo
 
         String ownerUUID = faction.getOwner().toString();
         String ownerName = Simple_Factions.playerDatabase.getPlayerName(ownerUUID);
-        player.sendMessage(ChatColor.AQUA + "The owner of " + faction.getName() + " is " + ownerName);
+        player.sendMessage(AQUA + "The owner of " + faction.getName() + " is " + ownerName);
     }
 }

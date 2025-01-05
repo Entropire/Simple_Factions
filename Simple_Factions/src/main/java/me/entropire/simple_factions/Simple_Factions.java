@@ -48,11 +48,13 @@ public final class Simple_Factions extends JavaPlugin
         getCommand("f").setTabCompleter(new FactionCommand());
         getCommand("chat").setTabCompleter(new chatCommands());
 
+        //loads database
         if (!getDataFolder().exists()) getDataFolder().mkdir();
         DataBaseContext dataBaseContext = new DataBaseContext(getDataFolder().getAbsolutePath() + "/Simple-Faction.db");
         factionDatabase = new FactionDatabase(dataBaseContext);
         playerDatabase = new PlayerDatabase(dataBaseContext);
 
+        //adds timer to bukkit scheduler for join and invite requests
         Bukkit.getScheduler().runTaskTimer(this, () ->
                 {
                     long currentTime = System.currentTimeMillis();

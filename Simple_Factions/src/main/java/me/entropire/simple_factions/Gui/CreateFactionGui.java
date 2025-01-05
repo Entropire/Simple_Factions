@@ -17,14 +17,10 @@ public class CreateFactionGui extends BaseGui
     {
         Gui gui = new Gui("New faction", GuiSize.Small);
 
-        String factionName;
-        ChatColor factionColor;
         Faction faction;
         if(Simple_Factions.createFactions.containsKey(player.getUniqueId()))
         {
             faction = Simple_Factions.createFactions.get(player.getUniqueId());
-            factionName = faction.getName();
-            factionColor = faction.getColor();
         }
         else
         {
@@ -33,10 +29,10 @@ public class CreateFactionGui extends BaseGui
 
             faction = new Faction(0, "New Faction",  ChatColor.WHITE, player.getUniqueId(), members);
             Simple_Factions.createFactions.put(player.getUniqueId(), faction);
-
-            factionName = faction.getName();
-            factionColor = faction.getColor();
         }
+
+        String factionName = faction.getName();
+        ChatColor factionColor = faction.getColor();
 
         gui.addButton(2, "Faction name", Material.NAME_TAG, factionName,
                 (btn, event) -> new SetFactionNameGui(faction).open(player));
@@ -44,7 +40,8 @@ public class CreateFactionGui extends BaseGui
         gui.addButton(6, "Faction color", Colors.getMaterialWithChatColor(factionColor), factionColor + Colors.getColorNameWithChatColor(factionColor),
                 (btn, event) -> new SetFactionColorGui().open(player));
 
-        gui.addButton(factionName.equals("New Faction") ? 22 : 23, "Discard", Material.RED_WOOL, "Discard your faction creation.", (btn, event) -> {
+        gui.addButton(factionName.equals("New Faction") ? 22 : 23, "Discard", Material.RED_WOOL, "Discard your faction creation.",
+                (btn, event) -> {
             FactionEditor.DeleteFactionCreation(player);
             event.getView().getPlayer().closeInventory();
         });
