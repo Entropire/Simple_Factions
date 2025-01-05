@@ -35,7 +35,7 @@ public class chatCommands implements CommandExecutor, TabCompleter
 
         if(!Simple_Factions.playerDatabase.hasFaction(player))
         {
-            player.sendMessage(YELLOW + "You must be in a faction to change the chat.");
+            player.sendMessage(RED + "You must be in a faction to preform this action!");
             return false;
         }
         Simple_Factions.playerDatabase.setChat(player.getUniqueId(), args[0].toLowerCase());

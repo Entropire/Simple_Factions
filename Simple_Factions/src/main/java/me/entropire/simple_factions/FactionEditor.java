@@ -34,7 +34,7 @@ public class FactionEditor
 
         changePlayerDisplayName(player, faction.getColor() + "[" + faction.getName() + "] " + player.getName());
 
-        player.sendMessage(AQUA + "New faction " + factionName + " created.");
+        player.sendMessage(AQUA + "New faction " + factionName + " created");
     }
 
     public static void create(Player player)
@@ -48,7 +48,7 @@ public class FactionEditor
 
         changePlayerDisplayName(player, faction.getColor() + "[" + faction.getName() + "] " + player.getName());
 
-        player.sendMessage(GREEN + "New faction " + faction.getName() + " created.");
+        player.sendMessage(GREEN + "New faction " + faction.getName() + " created");
     }
 
     public static void kick(Player player, String playerName)
@@ -145,7 +145,7 @@ public class FactionEditor
             if(member != null)
             {
                 changePlayerDisplayName(member, member.getName());
-                if(member.isOnline()) member.sendMessage(AQUA + "You have been kicked from your faction");
+                if(member.isOnline()) member.sendMessage(AQUA + "You have been kicked from your faction because the faction has been deleted");
             }
         }
         Simple_Factions.factionDatabase.deleteFaction(factionId);
@@ -243,7 +243,7 @@ public class FactionEditor
             return;
         }
         if(!faction.getMembers().contains(newOwnerName)){
-            player.sendMessage(RED + "You can only promote members of your faction to owner!");
+            player.sendMessage(RED + "This player is not a part of your faction!");
             return;
         }
 

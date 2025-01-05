@@ -1,50 +1,50 @@
 FactionEditor - line 93
 ## [Info] Aqua
-- Changed chat: "Changed chat to (Chat type)"
-- Created a new faction: "New faction (factionName) created."
-- Kicked member out of a faction: "You have kicked (playerName) out of your faction"
-- Player is kicked from his faction: "You have been kicked from your faction"
-- Player leaves faction: "You have left your faction"
-- Player deleted there faction: "You have deleted your faction"
-- Player kicked becous faction has been deleted: "You have been kicked from your faction" 
-- Player changed faction name: "You have changed your faction name to (factionName)"
-- Player changed faction color: "You have changed your faction color to (factionColor)"
-- Player changed faction owner: "You have promoted (memberName) to owner"
-- Player owner of faction: "The owner of (factionName) is (ownerName)"
+| Info message                                                                | description                                                                    | preformed action      |
+|:----------------------------------------------------------------------------|:-------------------------------------------------------------------------------|-----------------------|
+| Changed chat to (Chat type)                                                 | Player chat has been changed to public or faction                              | /chat                 |
+| New faction (factionName) created                                           | Player has created a new faction with the name (faction name)                  | /faction create       |                 
+| You have kicked (playerName) out of your faction                            | Faction owner has kicked member with the name (playerName) from there faction  | /faction kick         |
+| You have been kicked from your faction                                      | Player has been kicked from there faction                                      | /faction kick         |
+| You have left your faction                                                  | Player has left there faction                                                  | /faction leave        |
+| You have deleted your faction                                               | Faction owner has deleted there faction                                        | /faction delete       |
+| You have been kicked from your faction because the faction has been deleted | Player has been kicked from there faction because the faction has been deleted | /faction delete       |                
+| You have changed your faction name to (factionName)                         | Faction owner has changes there faction name to (factionName)                  | /faction modify name  |
+| You have changed your faction color to (factionColor)                       | Faction owner has changes there faction color to (factionColor)                | /faction modify color |
+| You have promoted (memberName) to owner                                     | Faction owner has made a member owner of the faction                           | /faction modify owner |
+| The owner of (factionName) is (ownerName)                                   | n/a                                                                            | /faction modify owner |
 
 ## [Waring] Yellow 
-
-- Wrong command usage /chat: "Command usage: /chat [public or faction]"
-- Player now in a faction when preforming /chat: "You must be in a faction to change the chat."
-- Wrong command usage /faction: "Invalid command!"
-- Wrong command usage /faction create: "Command usage /faction create [Faction name]"
-- Wrong command usage /faction kick: "Command usage /faction kick [Player name]"
-- Wrong command usage /faction invite: "Command usage /faction invite [Player name]"
-- Wrong command usage /faction join: "Command usage /faction join [Faction name]"
-- Wrong command usage /faction modify: "Invalid command!"
-- Wrong command usage /faction modify name: "Command usage /faction modify name [New faction name]"
-- Wrong command usage /faction modify color: "Command usage /faction modify name [Color name]"
-- Wrong command usage /faction modify owner: "Command usage /faction modify owner [Member name]"
-- Faction name is already in use: "The name (factionName) is already in use by another faction!"
-- Wrong command usage /faction members: "Command usage /faction members [Faction name]"
-- There is no faction with the given factionName: "There is no faction with the name [Faction name]"
-- Wrong command usage /faction owner: "Command usage /faction owner [Faction name]"
+| Waring message                                               | description                                            | preformed action                        |
+|:-------------------------------------------------------------|:-------------------------------------------------------|-----------------------------------------|
+| Invalid command!                                             | Wrong usage of the command /faction or /faction modify | /faction or /faction modify             |
+| Command usage: /chat [public or faction]                     | Wrong usage of the command /chat                       | /chat                                   |
+| Command usage /faction create [Faction name]                 | Wrong usage of the command /faction create             | /faction create                         |
+| Command usage /faction kick [Player name]                    | Wrong usage of the command /faction kick               | /faction kick                           |
+| Command usage /faction invite [Player name]                  | Wrong usage of the command /faction invite             | /faction invite                         |
+| Command usage /faction join [Faction name]                   | Wrong usage of the command /faction join               | /faction join                           |
+| Command usage /faction modify name [New faction name]        | Wrong usage of the command /faction modify name        | /faction modify name                    |
+| Command usage /faction modify name [Color name]              | Wrong usage of the command /faction modify color       | /faction modify color                   |
+| Command usage /faction modify owner [Member name]            | Wrong usage of the command /faction modify owner       | /faction modify owner                   |
+| Command usage /faction members [Faction name]                | Wrong usage of the command /faction members            | /faction members                        |
+| Command usage /faction owner [Faction name]                  | Wrong usage of the command /faction owner              | /faction owner                          |
+| There is no faction with the name [Faction name]             | No faction has been found with the name (factionName)  | /faction members or /faction owner      |
 
 ## [Error] Red
+| Error message                                                | description                                                                                 |
+|:-------------------------------------------------------------|:--------------------------------------------------------------------------------------------|
+| Only players can preform this command!                       | Non player / console trying to preform a command                                            | 
+| You are already in a faction!                                | Player already has a faction                                                                |
+| You must be in a faction to preform this action!             | Player trying to preform a command for a faction (by example /faction chat)                 |
+| You can not preform this action as owner of the faction!     | Faction owner trying to preform a action for an faction member (by example /faction leave)  |
+| You must be the owner of the faction to preform this action! | Faction member trying to preform a action for an faction owner (by example /faction modify) |
+| This player is not a part of your faction!                   | Faction action being preformed on non member player (by example /faction modify owner)      |
+| You can not kick the owner from the faction!                 | Faction owner trying to kick himself from the faction                                       |
+| Your faction data has not been found!                        | Failed te retrieve the faction data of player                                               |
+| The name (factionName) is already in use by another faction! | Faction name is already in use by another faction                                           | *
+| (colorName) is not a valid color!                            | The supplied colorName is not a known color                                                 |
 
-- Command sender not player: "Only players can preform this command!"
-- Player is already in a faction: "You are already in a faction!"
-- Player does not have a faction: "You must be in a faction to preform this action!"
-- Player is the owner of the faction: "You can not preform this action as owner of the faction!"
-- Player is not the owner of the faction: "You must be the owner of the faction to preform this action!"
-- Player is not a member of the faction: "This player is not a part of your faction!"
-- When the owner is trying to kick him self: "You can not kick the owner from the faction!"
-- When owner tries to make a nonmember owner of the fation: "You can only promote members of your faction to owner!"
-- Faction data not fount: "Your faction data has not been found!" 
-- Faction name is already taken: "the name (factionName) is already in use by another faction!"
-- Color not valid: "(colorName) is not a valid color!"
-
-### [Database Errors]
+### [Database Errors] //will do this one some other time 
 - Failed to connect to database: "Failed to connect to the dataBase: (errorMessage)"
 - Failed to create/load factions table: "Failed to create/load factions table in database: (errorMessage)"
 - Failed to add faction to the factions table: "Failed to add faction to the factions table: (errorMessage)" 
