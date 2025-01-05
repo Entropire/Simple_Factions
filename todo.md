@@ -5,15 +5,8 @@
 - alies and enemies
 - land claiming
 
-[needs fixing]
-- next and previous button faction list gui
-- creating a new faction with gui ?????
-
-
 [to do]
-- Fix upper case check for faction names (this "Factionname" is the same as this "FactionName")
 - Remake/rethink the Create faction menu system
-- Faction name cant have spaces, spacial characters, number and uppercase characters
 
 [done]
 - when player gets kicked the player that is kicked does not get a message if they are online
@@ -32,7 +25,9 @@
 - add tab completion for /faction modify color and /faction modify owner
 - with the /faction list make tabs that the player can go through
 - with the /faction members make tabs that the player can go through
+- Faction name cant have spaces, spacial characters, number and uppercase characters
 
 [not done but also not going to implement for now]
 - when request to join a faction if the owner is not online it sent an error instead of an owner not online
 - when something changes in the faction reopen all the open faction info gui's
+- when creating a faction with the gui save but do not create it so they can close and open the create menu and not lose data.

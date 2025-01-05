@@ -47,20 +47,6 @@ public class FactionEditor
         player.sendMessage(AQUA + "New faction " + factionName + " created");
     }
 
-    public static void create(Player player)
-    {
-        Faction faction = Simple_Factions.createFactions.get(player.getUniqueId());
-
-        Simple_Factions.factionDatabase.addFaction(faction);
-        Simple_Factions.playerDatabase.updateFactionWithPlayerName(player.getName(), Simple_Factions.factionDatabase.getFactionDataByName(faction.getName()).getId());
-
-        Simple_Factions.createFactions.remove(player.getUniqueId());
-
-        changePlayerDisplayName(player, faction.getColor() + "[" + faction.getName() + "] " + player.getName());
-
-        player.sendMessage(AQUA + "New faction " + faction.getName() + " created");
-    }
-
     public static void kick(Player player, String playerName)
     {
         if(!Simple_Factions.playerDatabase.hasFaction(player))
@@ -268,14 +254,6 @@ public class FactionEditor
         String newOwnerUUID = Simple_Factions.playerDatabase.getPlayerUUID(newOwnerName).toString();
         Simple_Factions.factionDatabase.updateFactionOwner(factionId, newOwnerUUID);
         player.sendMessage(AQUA + "You have promoted " + newOwnerName + " to owner");
-    }
-
-    public static void DeleteFactionCreation(Player player)
-    {
-        if(Simple_Factions.createFactions.containsKey(player.getUniqueId()))
-        {
-            Simple_Factions.createFactions.remove(player.getUniqueId());
-        }
     }
 
     //I know there are 2 of these, but I am lazy leave me. this already is one giant mess

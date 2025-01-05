@@ -1,5 +1,4 @@
 me\entropire\simple_factions\database\PlayerDatabase.class
-me\entropire\simple_factions\Gui\SetFactionNameGui.class
 me\entropire\simple_factions\events\OnInventoryClick.class
 me\entropire\simple_factions\Gui\FactionListGui.class
 me\entropire\simple_factions\Simple_Factions.class
@@ -20,7 +19,6 @@ me\entropire\simple_factions\Gui\Gui.class
 me\entropire\simple_factions\FactionInvitor.class
 me\entropire\simple_factions\events\Message.class
 me\entropire\simple_factions\Gui\FactionGui.class
-me\entropire\simple_factions\Gui\SetFactionColorGui.class
 me\entropire\simple_factions\Gui\ChangeFactionNameGui.class
 me\entropire\simple_factions\Gui\ButtonPressAction.class
 me\entropire\simple_factions\objects\Join.class

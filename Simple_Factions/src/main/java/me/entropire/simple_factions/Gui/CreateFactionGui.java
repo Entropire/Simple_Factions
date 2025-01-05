@@ -2,58 +2,51 @@ package me.entropire.simple_factions.Gui;
 
 import me.entropire.simple_factions.FactionEditor;
 import me.entropire.simple_factions.Simple_Factions;
-import me.entropire.simple_factions.objects.Colors;
-import me.entropire.simple_factions.objects.Faction;
+import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+import static org.bukkit.ChatColor.*;
 
 public class CreateFactionGui extends BaseGui
 {
     @Override
     public void open(Player player)
     {
-        Gui gui = new Gui("New faction", GuiSize.Small);
+        new AnvilGUI.Builder()
+                .onClick((slot, stateSnapshot) -> {
+                    if(slot != AnvilGUI.Slot.OUTPUT) {
+                        return Collections.emptyList();
+                    }
 
-        Faction faction;
-        if(Simple_Factions.createFactions.containsKey(player.getUniqueId()))
-        {
-            faction = Simple_Factions.createFactions.get(player.getUniqueId());
-        }
-        else
-        {
-            ArrayList<String> members = new ArrayList<>();
-            members.add(player.getName());
+                    String factionName = stateSnapshot.getText().toLowerCase();
 
-            faction = new Faction(0, "new faction",  ChatColor.WHITE, player.getUniqueId(), members);
-            Simple_Factions.createFactions.put(player.getUniqueId(), faction);
-        }
+                    if(factionName.matches(".*[^a-zA-Z].*"))
+                    {
+                        player.sendMessage(ChatColor.RED + "Special characters are not allowed in an faction names!");
+                        return Arrays.asList(AnvilGUI.ResponseAction.replaceInputText("faction"));
+                    }
 
-        String factionName = faction.getName();
-        ChatColor factionColor = faction.getColor();
+                    if(stateSnapshot.getText().equalsIgnoreCase("faction"))
+                    {
+                        return Arrays.asList(AnvilGUI.ResponseAction.replaceInputText("faction"));
+                    }
 
-        gui.addButton(2, "Faction name", Material.NAME_TAG, factionName,
-                (btn, event) -> new SetFactionNameGui(faction).open(player));
+                    if(Simple_Factions.factionDatabase.factionExistsByName(factionName))
+                    {
+                        player.sendMessage(RED + "the name " + factionName + " is already in use by another faction!");
+                        return Arrays.asList(AnvilGUI.ResponseAction.close());
+                    }
 
-        gui.addButton(6, "Faction color", Colors.getMaterialWithChatColor(factionColor), factionColor + Colors.getColorNameWithChatColor(factionColor),
-                (btn, event) -> new SetFactionColorGui().open(player));
-
-        gui.addButton(factionName.equals("New Faction") ? 22 : 23, "Discard", Material.RED_WOOL, "Discard your faction creation.",
-                (btn, event) -> {
-            FactionEditor.DeleteFactionCreation(player);
-            event.getView().getPlayer().closeInventory();
-        });
-
-        if(!factionName.equals("new faction"))
-        {
-            gui.addButton(21, "Create", Material.GREEN_WOOL, "Create your new faction.", (btn, event) -> {
-                FactionEditor.create(player);
-                player.closeInventory();
-            });
-        }
-
-        player.openInventory(gui.create());
+                    FactionEditor.create(player, factionName);
+                    return Arrays.asList(AnvilGUI.ResponseAction.close());
+                })
+                .text("faction")
+                .title("Set faction name")
+                .plugin(Simple_Factions.plugin)
+                .open(player);
     }
 }

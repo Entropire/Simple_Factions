@@ -3,7 +3,6 @@ package me.entropire.simple_factions.commands;
 import me.entropire.simple_factions.FactionEditor;
 import me.entropire.simple_factions.FactionInfo;
 import me.entropire.simple_factions.FactionInvitor;
-import me.entropire.simple_factions.Gui.CreateFactionGui;
 import me.entropire.simple_factions.Gui.FactionGui;
 import me.entropire.simple_factions.Gui.SimpleFactionGui;
 import me.entropire.simple_factions.Simple_Factions;
@@ -43,11 +42,6 @@ public class FactionCommand implements CommandExecutor, TabCompleter
                 Faction faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
                 new FactionGui(faction).open(player);
                 return true;
-            }
-
-            if(Simple_Factions.createFactions.containsKey(player.getUniqueId()))
-            {
-               new CreateFactionGui().open(player);
             }
             else
             {
