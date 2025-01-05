@@ -45,7 +45,7 @@ public class FactionListGui extends BaseGui
         }
         else
         {
-            gui.addButton(53, "", Material.GRAY_STAINED_GLASS_PANE, "", null);
+            gui.addButton(53, "§r", Material.GRAY_STAINED_GLASS_PANE, "", null);
         }
 
         if(pageNumber > 0)
@@ -60,18 +60,18 @@ public class FactionListGui extends BaseGui
         }
         else
         {
-            gui.addButton(45, "", Material.GRAY_STAINED_GLASS_PANE, "", null);
+            gui.addButton(45, "§r", Material.GRAY_STAINED_GLASS_PANE, "", null);
         }
 
         gui.addButton(49, "Return", Material.RED_WOOL, "Go back to the main menu.",
                 (btn, event) -> new SimpleFactionGui().open(player));
 
-        gui.addButton(46, ".", Material.GRAY_STAINED_GLASS_PANE, "", null);
-        gui.addButton(47, ".", Material.GRAY_STAINED_GLASS_PANE, "", null);
-        gui.addButton(48, ".", Material.GRAY_STAINED_GLASS_PANE, "", null);
-        gui.addButton(50, ".", Material.GRAY_STAINED_GLASS_PANE, "", null);
-        gui.addButton(51, ".", Material.GRAY_STAINED_GLASS_PANE, "", null);
-        gui.addButton(52, ".", Material.GRAY_STAINED_GLASS_PANE, "", null);
+        gui.addButton(46, "§r", Material.GRAY_STAINED_GLASS_PANE, "", null);
+        gui.addButton(47, "§r", Material.GRAY_STAINED_GLASS_PANE, "", null);
+        gui.addButton(48, "§r", Material.GRAY_STAINED_GLASS_PANE, "", null);
+        gui.addButton(50, "§r", Material.GRAY_STAINED_GLASS_PANE, "", null);
+        gui.addButton(51, "§r", Material.GRAY_STAINED_GLASS_PANE, "", null);
+        gui.addButton(52, "§r", Material.GRAY_STAINED_GLASS_PANE, "", null);
 
         player.openInventory(gui.create());
     }

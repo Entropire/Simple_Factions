@@ -7,8 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import static org.bukkit.ChatColor.GREEN;
-import static org.bukkit.ChatColor.RED;
+import static org.bukkit.ChatColor.*;
 
 public class FactionInvitor
 {
@@ -51,11 +50,11 @@ public class FactionInvitor
         Invite invite = new Invite(invitedPlayer.getUniqueId(), factionId, System.currentTimeMillis() + 30000);
         Simple_Factions.invites.put(invitedPlayer.getUniqueId(), invite);
 
-        invitedPlayer.sendMessage(GREEN + "You have been invited for the faction " + faction.getName());
-        invitedPlayer.sendMessage("to accept type: /faction accept");
-        invitedPlayer.sendMessage("to decline type: /faction decline");
+        invitedPlayer.sendMessage(YELLOW + "You have been invited for the faction " + faction.getName());
+        invitedPlayer.sendMessage(YELLOW + "to accept type: /faction accept");
+        invitedPlayer.sendMessage(YELLOW + "to decline type: /faction decline");
 
-        player.sendMessage(GREEN + "Invited " + invitedPlayerName + " to your faction.");
+        player.sendMessage(YELLOW + "Invited " + invitedPlayerName + " to your faction.");
     }
 
     public static void join(Player player, String factionName)
@@ -67,7 +66,7 @@ public class FactionInvitor
         }
         if(!Simple_Factions.factionDatabase.factionExistsByName(factionName))
         {
-            player.sendMessage(RED + "faction " + factionName + " does not exist.");
+            player.sendMessage(RED + "Faction " + factionName + " does not exist.");
             return;
         }
 
@@ -81,11 +80,11 @@ public class FactionInvitor
         Join join = new Join(faction.getOwner(), player.getUniqueId(), faction.getId(), System.currentTimeMillis() + 30000);
         Simple_Factions.joins.put(faction.getOwner(), join);
 
-        player.sendMessage(GREEN + "You have send a join request to " + faction.getName());
+        player.sendMessage(YELLOW + "You have send a join request to " + faction.getName());
 
-        receiver.sendMessage(GREEN + player.getName() + " wants to join your faction.");
-        receiver.sendMessage("to accept type: /faction accept");
-        receiver.sendMessage("to decline type: /faction decline");
+        receiver.sendMessage(YELLOW + player.getName() + " wants to join your faction.");
+        receiver.sendMessage(YELLOW + "to accept type: /faction accept");
+        receiver.sendMessage(YELLOW + "to decline type: /faction decline");
     }
 
     public static void accept(Player player)
@@ -98,8 +97,15 @@ public class FactionInvitor
             Simple_Factions.factionDatabase.updateFactionMembers(invite.factionId(), player.getName(), true);
             Simple_Factions.playerDatabase.updateFactionWithPlayerName(player.getName(), invite.factionId());
 
+            Player sender = Bukkit.getPlayer(faction.getOwner());
+
+            if(sender != null)
+            {
+                player.sendMessage(YELLOW + player.getName() + " is now part of your faction.");
+            }
+
             changePlayerDisplayName(player, faction.getColor() + "[" + faction.getName() + "] " + player.getName());
-            player.sendMessage(GREEN + "you have joined the faction " + faction.getName());
+            player.sendMessage(YELLOW + "You have joined the faction " + faction.getName());
 
             Simple_Factions.invites.remove(player.getUniqueId());
             return;
@@ -119,9 +125,9 @@ public class FactionInvitor
             if(sender != null)
             {
                 changePlayerDisplayName(sender, faction.getColor() + "[" + faction.getName() + "] " + sender.getName());
-                sender.sendMessage(GREEN + "You have joined the faction " + faction.getName());
+                sender.sendMessage(YELLOW + "You have joined the faction " + faction.getName());
             }
-            player.sendMessage(GREEN + senderName + " is now part of your faction.");
+            player.sendMessage(YELLOW + senderName + " is now part of your faction.");
 
             return;
         }
@@ -136,7 +142,7 @@ public class FactionInvitor
             Invite invite = Simple_Factions.invites.get(player.getUniqueId());
             Faction faction = Simple_Factions.factionDatabase.getFactionDataById(invite.factionId());
 
-            player.sendMessage(GREEN + "you have declined the faction invitation from " + faction.getName());
+            player.sendMessage(YELLOW + "you have declined the faction invitation from " + faction.getName());
 
             Simple_Factions.invites.remove(player.getUniqueId());
             return;
@@ -152,7 +158,7 @@ public class FactionInvitor
 
             if(sender != null)
             {
-                sender.sendMessage(GREEN + player.getName() + " declined your join request.");
+                sender.sendMessage(YELLOW + player.getName() + " declined your join request.");
             }
 
             Simple_Factions.joins.remove(player.getUniqueId());

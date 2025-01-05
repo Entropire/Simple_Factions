@@ -48,7 +48,7 @@ public class FactionEditor
 
         changePlayerDisplayName(player, faction.getColor() + "[" + faction.getName() + "] " + player.getName());
 
-        player.sendMessage(GREEN + "New faction " + faction.getName() + " created");
+        player.sendMessage(AQUA + "New faction " + faction.getName() + " created");
     }
 
     public static void kick(Player player, String playerName)

@@ -10,10 +10,10 @@ public class SimpleFactionGui extends BaseGui
     {
         Gui gui = new Gui("Simple-Factions", GuiSize.Small);
 
-        gui.addButton(11, "Create new faction", Material.ANVIL, "Create a new faction.",
+        gui.addButton(11, "Create", Material.ANVIL, "Create a new faction.",
                 (btn, event) -> new CreateFactionGui().open(player));
 
-        gui.addButton(15, "Join faction", Material.NAME_TAG, "Join a faction.",
+        gui.addButton(15, "Join", Material.NAME_TAG, "Join a existing faction.",
                 (btn, event) -> new FactionListGui(0).open(player));
 
         player.openInventory(gui.create());

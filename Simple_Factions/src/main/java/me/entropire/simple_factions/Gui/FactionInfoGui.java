@@ -53,7 +53,7 @@ public class FactionInfoGui extends BaseGui
             player.closeInventory();
         });
 
-        gui.addButton(23, "Return", Material.RED_WOOL, "Go back to the previous page.",
+        gui.addButton(23, "Return", Material.RED_WOOL, "Go back to the factions list.",
                 (btn, event) -> new FactionListGui(0).open(player));
 
         player.openInventory(gui.create());

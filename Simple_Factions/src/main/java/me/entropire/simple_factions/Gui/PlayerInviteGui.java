@@ -18,13 +18,13 @@ public class PlayerInviteGui extends BaseGui
     {
         Gui gui = new Gui(playerName, GuiSize.Small);
 
-        gui.addButton(12, "Invite", Material.PAPER, "Invite this player to your faction",
+        gui.addButton(12, "Invite", Material.PAPER, "Invite this player to your faction.",
                 (btn, event) -> {
                     FactionInvitor.invite(player, playerName);
                     player.closeInventory();
                 });
 
-        gui.addButton(15, "Return", Material.RED_WOOL, "",
+        gui.addButton(15, "Return", Material.RED_WOOL, "Return to the player list.",
                 (btn, event) -> new PlayerListGui(0).open(player));
 
         player.openInventory(gui.create());
