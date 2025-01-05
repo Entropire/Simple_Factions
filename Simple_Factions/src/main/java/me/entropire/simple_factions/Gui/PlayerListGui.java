@@ -19,44 +19,45 @@ public class PlayerListGui extends BaseGui
 
     public void open(Player player)
     {
-        Gui gui = new Gui("Player page " + pageNumber, GuiSize.Large);
-
         int factionId = Simple_Factions.playerDatabase.getFactionId(player);
         Faction faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
 
-        ArrayList<String> playerNames = Simple_Factions.playerDatabase.getPlayerWithNoFaction();
-        Iterator<String> playerNamesIterator = playerNames.iterator();
+        ArrayList<String> players = Simple_Factions.playerDatabase.getPlayerWithNoFaction();
+        Iterator<String> playerIterator = players.iterator();
 
-        while(playerNamesIterator.hasNext())
+        while(playerIterator.hasNext())
         {
-            Player noFactionPlayer = Bukkit.getPlayer(playerNamesIterator.next());
+            Player noFactionPlayer = Bukkit.getPlayer(playerIterator.next());
             if(noFactionPlayer == null || !noFactionPlayer.isOnline())
             {
-                playerNamesIterator.remove();
+                playerIterator.remove();
             }
         }
 
-        if(!playerNames.isEmpty())
+        int maxPageNumber = (int)Math.ceil(players.size() / 45) + 1;
+
+        Gui gui = new Gui("Players - " + pageNumber + "/" + maxPageNumber, GuiSize.Large);
+
+        if(!players.isEmpty())
         {
+            int endIndex = Math.min(45 * pageNumber, players.size());
+            int startIndex = 45 * (pageNumber - 1);
             int index = 0;
-            for(int i = 45 * pageNumber, j = Math.min(45 * (pageNumber + 1), playerNames.size()); i < j; i++)
+            for(int i = startIndex; i < endIndex; i++)
             {
-                gui.addButton(index, playerNames.get(i), Material.PLAYER_HEAD, "",
+                gui.addButton(index, players.get(i), Material.PLAYER_HEAD, "",
                         (btn, event) -> new PlayerInviteGui(btn.getItemMeta().getDisplayName()).open(player));
 
                 index++;
             }
         }
 
-        float pageAmount = (float) playerNames.size() / 45;
-
-        if(pageNumber < pageAmount - 1)
+        if(pageNumber < maxPageNumber)
         {
             gui.addButton(53, "Next", Material.STONE_BUTTON, "Go to the next page.",
                     (btn, event) -> {
-                String inventoryName = event.getView().getTitle().replace("Factions page ", "");
-                int eventPageNumber = Integer.parseInt(inventoryName) + 1;
-
+                String inventoryName = event.getView().getTitle().replace("Players - ", "");
+                int eventPageNumber = Integer.parseInt( inventoryName.split("/")[0]) + 1;
                 new FactionListGui(eventPageNumber).open(player);
             });
         }
@@ -65,13 +66,12 @@ public class PlayerListGui extends BaseGui
             gui.addButton(53, "§r", Material.GRAY_STAINED_GLASS_PANE, "", null);
         }
 
-        if(pageNumber > 0)
+        if(pageNumber > 1)
         {
             gui.addButton(45, "Previous", Material.STONE_BUTTON, "Go to the previous page.",
                     (btn, event) -> {
-                String inventoryName = event.getView().getTitle().replace("Factions page ", "");
-                int eventPageNumber = Integer.parseInt(inventoryName) - 1;
-
+                String inventoryName = event.getView().getTitle().replace("Players - ", "");
+                int eventPageNumber = Integer.parseInt( inventoryName.split("/")[0]) - 1;
                 new FactionListGui(eventPageNumber).open(player);
             });
         }

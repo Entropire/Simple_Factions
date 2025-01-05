@@ -46,7 +46,7 @@ public class CreateFactionGui extends BaseGui
             event.getView().getPlayer().closeInventory();
         });
 
-        if(!factionName.equals("New Faction"))
+        if(!factionName.equals("new faction"))
         {
             gui.addButton(21, "Create", Material.GREEN_WOOL, "Create your new faction.", (btn, event) -> {
                 FactionEditor.create(player);

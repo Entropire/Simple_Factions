@@ -45,7 +45,7 @@ public class FactionGui extends BaseGui
                 (btn, event) -> {
             if (faction.getOwner().equals(player.getUniqueId()))
             {
-                new FactionMembersListGui(0).open(player);
+                new FactionMembersListGui(1).open(player);
             }
         });
 
@@ -56,12 +56,12 @@ public class FactionGui extends BaseGui
         }
 
         gui.addButton(16, "Faction members", Material.OAK_SIGN, members,
-                (btn, event) -> new FactionMembersListGui(0).open(player));
+                (btn, event) -> new FactionMembersListGui(1).open(player));
 
         if(faction.getOwner().equals(player.getUniqueId()))
         {
             gui.addButton(18, "Invite Player", Material.PAPER,  "Invite a new player to your faction.",
-                    (btn, event) -> new PlayerListGui(0).open(player));
+                    (btn, event) -> new PlayerListGui(1).open(player));
 
             gui.addButton(26, "Delete Faction", Material.RED_WOOL,  "Delete your faction.",
                     (btn, event) -> {

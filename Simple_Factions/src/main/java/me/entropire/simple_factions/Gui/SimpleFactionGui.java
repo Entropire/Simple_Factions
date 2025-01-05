@@ -14,7 +14,7 @@ public class SimpleFactionGui extends BaseGui
                 (btn, event) -> new CreateFactionGui().open(player));
 
         gui.addButton(15, "Join", Material.NAME_TAG, "Join a existing faction.",
-                (btn, event) -> new FactionListGui(0).open(player));
+                (btn, event) -> new FactionListGui(1).open(player));
 
         player.openInventory(gui.create());
     }
