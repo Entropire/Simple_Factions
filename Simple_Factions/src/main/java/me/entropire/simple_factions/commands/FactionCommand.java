@@ -7,6 +7,7 @@ import me.entropire.simple_factions.Gui.CreateFactionGui;
 import me.entropire.simple_factions.Gui.FactionGui;
 import me.entropire.simple_factions.Gui.SimpleFactionGui;
 import me.entropire.simple_factions.Simple_Factions;
+import me.entropire.simple_factions.objects.Colors;
 import me.entropire.simple_factions.objects.Faction;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -303,6 +304,25 @@ public class FactionCommand implements CommandExecutor, TabCompleter
                         suggestions.add("name");
                         suggestions.add("color");
                         suggestions.add("owner");
+                        break;
+                }
+                break;
+            case 3:
+                switch(args[1].toLowerCase())
+                {
+                    case "color":
+                        suggestions.addAll(Colors.getColorNames());
+                        break;
+                    case "owner":
+                        int factionId = Simple_Factions.playerDatabase.getFactionId(player);
+                        Faction faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
+
+                        if(faction != null)
+                        {
+                            ArrayList<String> members = faction.getMembers();
+                            members.remove(player.getName());
+                            suggestions.addAll(members);
+                        }
                         break;
                 }
                 break;

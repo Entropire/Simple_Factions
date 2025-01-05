@@ -155,6 +155,8 @@ public class FactionEditor
 
     public static void modifyName(Player player, String newFactionName)
     {
+        newFactionName = newFactionName.toLowerCase();
+
         if(!Simple_Factions.playerDatabase.hasFaction(player))
         {
             player.sendMessage(RED + "You must be in a faction to preform this action!");

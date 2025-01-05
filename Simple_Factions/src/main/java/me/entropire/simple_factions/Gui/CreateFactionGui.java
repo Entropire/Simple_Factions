@@ -27,7 +27,7 @@ public class CreateFactionGui extends BaseGui
             ArrayList<String> members = new ArrayList<>();
             members.add(player.getName());
 
-            faction = new Faction(0, "New Faction",  ChatColor.WHITE, player.getUniqueId(), members);
+            faction = new Faction(0, "new faction",  ChatColor.WHITE, player.getUniqueId(), members);
             Simple_Factions.createFactions.put(player.getUniqueId(), faction);
         }
 

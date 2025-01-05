@@ -28,18 +28,20 @@ public class SetFactionNameGui extends BaseGui
                         return Collections.emptyList();
                     }
 
+                    String factionName = faction.getName().toLowerCase();
+
                     if(stateSnapshot.getText().equalsIgnoreCase(faction.getName()))
                     {
                         return Arrays.asList(AnvilGUI.ResponseAction.replaceInputText(faction.getName()));
                     }
 
-                    if(Simple_Factions.factionDatabase.factionExistsByName(stateSnapshot.getText()))
+                    if(Simple_Factions.factionDatabase.factionExistsByName(factionName))
                     {
-                        player.sendMessage(RED + "the name " + stateSnapshot.getText() + " is already in use by another faction!");
+                        player.sendMessage(RED + "the name " + factionName + " is already in use by another faction!");
                         return Arrays.asList(AnvilGUI.ResponseAction.close());
                     }
 
-                    Simple_Factions.createFactions.get(player.getUniqueId()).setName(stateSnapshot.getText());
+                    Simple_Factions.createFactions.get(player.getUniqueId()).setName(factionName);
                     new CreateFactionGui().open(player);
                     return Arrays.asList(AnvilGUI.ResponseAction.close());
                 })
