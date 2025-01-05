@@ -198,7 +198,7 @@ public class FactionEditor
         }
        
         if(!Colors.colorNameExists(newColor)){
-            player.sendMessage(RED + "(colorName) is not a valid color!");
+            player.sendMessage(RED + newColor + " is not a valid color!");
             return;
         }
 
@@ -212,7 +212,7 @@ public class FactionEditor
         }
 
         Simple_Factions.factionDatabase.updateFactionColor(factionId, newColor);
-        player.sendMessage(AQUA + "You have changed your faction color to (factionColor) " + Colors.getChatColorWithColorName(newColor) + newColor);
+        player.sendMessage(AQUA + "You have changed your faction color to " + Colors.getChatColorWithColorName(newColor) + newColor);
         faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
 
         for(int i = 0; i < faction.getMembers().size(); i++)

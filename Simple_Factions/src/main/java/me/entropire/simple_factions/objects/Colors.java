@@ -38,7 +38,7 @@ public class Colors
 
     public static boolean colorNameExists(String colorName)
     {
-        return colorName.contains(colorName.toLowerCase());
+        return Colors.colorName.contains(colorName.toLowerCase());
     }
 
     public static ArrayList<String> getColorNames()

@@ -6,7 +6,6 @@
 - kick confirm
 
 [to do]
-- FIX THE GOD DAMN REPLY MESSAGES OF THE PLUGIN!!!!!
 - FIX THE GOD DAMN NAMES AND LORE OF THE BUTTONS!!!!!
 - add /cp (/chat public) and /cf (/chat faction)
 - Fix upper case check for faction names (this "Factionname" is the same as this "FactionName")
@@ -25,6 +24,7 @@
 - tab completion invite check if player is online and without a faction
 - when changing the faction name the faction menu is closed instead of opened again
 - when player join faction there name is change to [faction name](owner name) instead of [faction name](player name)
+- FIX THE GOD DAMN REPLY MESSAGES OF THE PLUGIN!!!!!
 
 [not done but also not going to implement for now]
 - when request to join a faction if the owner is not online it sent an error instead of an owner not online

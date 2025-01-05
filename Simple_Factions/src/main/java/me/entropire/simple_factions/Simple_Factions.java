@@ -34,8 +34,8 @@ public final class Simple_Factions extends JavaPlugin
         if(plugin == null) plugin = this;
 
         //loads events
-        this.getServer().getPluginManager().registerEvents(new OnJoin(this), this);
-        this.getServer().getPluginManager().registerEvents(new Message(this), this);
+        this.getServer().getPluginManager().registerEvents(new OnJoin(), this);
+        this.getServer().getPluginManager().registerEvents(new Message(), this);
         this.getServer().getPluginManager().registerEvents(new OnInventoryClick(), this);
 
         //loads commands
