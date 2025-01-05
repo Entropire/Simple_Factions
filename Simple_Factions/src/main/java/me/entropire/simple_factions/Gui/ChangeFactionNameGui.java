@@ -4,11 +4,12 @@ import me.entropire.simple_factions.FactionEditor;
 import me.entropire.simple_factions.Simple_Factions;
 import me.entropire.simple_factions.objects.Faction;
 import net.wesjd.anvilgui.AnvilGUI;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.Collections;
+
+import static org.bukkit.ChatColor.*;
 
 public class ChangeFactionNameGui extends BaseGui
 {
@@ -20,7 +21,7 @@ public class ChangeFactionNameGui extends BaseGui
 
         if(faction == null)
         {
-            player.sendMessage(ChatColor.RED + "You can only change the faction name if your in a faction and the owner of the faction!");
+            player.sendMessage(RED + "You must be the owner of the faction to preform this action!");
             return;
         }
 

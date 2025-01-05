@@ -3,11 +3,12 @@ package me.entropire.simple_factions.Gui;
 import me.entropire.simple_factions.Simple_Factions;
 import me.entropire.simple_factions.objects.Faction;
 import net.wesjd.anvilgui.AnvilGUI;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.Collections;
+
+import static org.bukkit.ChatColor.*;
 
 public class SetFactionNameGui extends BaseGui
 {
@@ -34,7 +35,7 @@ public class SetFactionNameGui extends BaseGui
 
                     if(Simple_Factions.factionDatabase.factionExistsByName(stateSnapshot.getText()))
                     {
-                        player.sendMessage(ChatColor.RED + "There already is a faction with that name.");
+                        player.sendMessage(RED + "the name " + stateSnapshot.getText() + " is already in use by another faction!");
                         return Arrays.asList(AnvilGUI.ResponseAction.close());
                     }
 
