@@ -10,3 +10,7 @@ commands:
   f:
   chat:
     description: Change the chat you type in
+  cp:
+    description: Change the chat to public
+  cf:
+    description: Change the chat to faction

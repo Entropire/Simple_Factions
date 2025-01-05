@@ -9,7 +9,6 @@ me\entropire\simple_factions\Gui\CreateFactionGui.class
 me\entropire\simple_factions\Gui\SimpleFactionGui.class
 me\entropire\simple_factions\Gui\BaseGui.class
 me\entropire\simple_factions\Gui\GuiSize.class
-me\entropire\simple_factions\commands\chatCommands.class
 me\entropire\simple_factions\Gui\ChangeFactionColorGui.class
 me\entropire\simple_factions\commands\FactionCommand.class
 me\entropire\simple_factions\events\OnJoin.class
@@ -31,4 +30,5 @@ me\entropire\simple_factions\objects\Invite.class
 me\entropire\simple_factions\Gui\Button.class
 me\entropire\simple_factions\Gui\PlayerListGui.class
 me\entropire\simple_factions\FactionEditor.class
+me\entropire\simple_factions\commands\ChatCommands.class
 me\entropire\simple_factions\Gui\FactionInfoGui.class

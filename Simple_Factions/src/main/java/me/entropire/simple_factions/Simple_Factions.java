@@ -1,7 +1,7 @@
 package me.entropire.simple_factions;
 
 import me.entropire.simple_factions.commands.FactionCommand;
-import me.entropire.simple_factions.commands.chatCommands;
+import me.entropire.simple_factions.commands.ChatCommands;
 import me.entropire.simple_factions.database.DataBaseContext;
 import me.entropire.simple_factions.database.FactionDatabase;
 import me.entropire.simple_factions.database.PlayerDatabase;
@@ -41,12 +41,14 @@ public final class Simple_Factions extends JavaPlugin
         //loads commands
         getCommand("faction").setExecutor(new FactionCommand());
         getCommand("f").setExecutor(new FactionCommand());
-        getCommand("chat").setExecutor(new chatCommands());
+        getCommand("chat").setExecutor(new ChatCommands());
+        getCommand("cp").setExecutor(new ChatCommands());
+        getCommand("cf").setExecutor(new ChatCommands());
 
         //loads commands tab completer
         getCommand("faction").setTabCompleter(new FactionCommand());
         getCommand("f").setTabCompleter(new FactionCommand());
-        getCommand("chat").setTabCompleter(new chatCommands());
+        getCommand("chat").setTabCompleter(new ChatCommands());
 
         //loads database
         if (!getDataFolder().exists()) getDataFolder().mkdir();

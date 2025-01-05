@@ -43,6 +43,7 @@ FactionEditor - line 93
 | Your faction data has not been found!                        | Failed te retrieve the faction data of player                                               |
 | The name (factionName) is already in use by another faction! | Faction name is already in use by another faction                                           | *
 | (colorName) is not a valid color!                            | The supplied colorName is not a known color                                                 |
+| (chatType) Is not an valid chat type!                        | The supplied chat is not a valid chat type                                                  |
 
 ### [Database Errors] //will do this one some other time 
 - Failed to connect to database: "Failed to connect to the dataBase: (errorMessage)"
