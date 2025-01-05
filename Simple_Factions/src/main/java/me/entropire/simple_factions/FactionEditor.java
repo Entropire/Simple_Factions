@@ -145,7 +145,7 @@ public class FactionEditor
             if(member != null)
             {
                 changePlayerDisplayName(member, member.getName());
-                if(member.isOnline()) member.sendMessage(AQUA + "You have been kicked from your faction because the faction has been deleted");
+                if(member.isOnline() && !faction.getOwner().equals(memberUUID)) member.sendMessage(AQUA + "You have been kicked from your faction because the faction has been deleted");
             }
         }
         Simple_Factions.factionDatabase.deleteFaction(factionId);
