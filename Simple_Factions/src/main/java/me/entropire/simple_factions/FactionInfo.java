@@ -9,71 +9,92 @@ import static org.bukkit.ChatColor.*;
 
 public class FactionInfo
 {
-    public static void list(Player player)
+    public static void list(Player player, int pageNumber)
     {
-        ArrayList<String> factionsNames = Simple_Factions.factionDatabase.getFactions();
-        player.sendMessage("Factions: ");
-        for (String factionsName : factionsNames)
+        ArrayList<String> factions = Simple_Factions.factionDatabase.getFactions();
+
+        int maxPageNumber = (int)Math.ceil(factions.size() / 9) + 1;
+
+        if(pageNumber > maxPageNumber || pageNumber < 0)
         {
-            player.sendMessage("- " + factionsName);
+            player.sendMessage(YELLOW + "Invalid page number!");
+            return;
+        }
+
+        player.sendMessage(AQUA + "Factions - " + pageNumber + "/" + maxPageNumber);
+
+        if(!factions.isEmpty())
+        {
+            factions.remove(player.getDisplayName());
+
+            int endIndex = Math.min(9 * pageNumber, factions.size());
+            int startIndex = 9 * (pageNumber - 1);
+            for(int i = startIndex; i < endIndex; i++)
+            {
+                player.sendMessage(AQUA + "- " + factions.get(i));
+            }
         }
     }
 
-    public static void members(Player player, String factionName)
+    public static void members(Player player, String factionName, int pageNumber)
     {
-        if(!Simple_Factions.playerDatabase.hasFaction(player) && factionName == null)
-        {
-            player.sendMessage(RED + "Command usage /faction members [Faction name]");
-            return;            
-        }
-       
-        if(!Simple_Factions.factionDatabase.factionExistsByName(factionName))
+        Faction faction = Simple_Factions.factionDatabase.getFactionDataByName(factionName);;
+
+        if(faction == null)
         {
             player.sendMessage(RED + "There is no faction with the name " + factionName);
             return;
-        } 
-        
-        Faction faction;
-        
-        if(factionName == null)
-        {
-            int factionId = Simple_Factions.playerDatabase.getFactionId(player);
-            faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
         }
-        else
+
+        ArrayList<String> members = faction.getMembers();
+
+        int maxPageNumber = (int)Math.ceil(members.size() / 9) + 1;
+
+        if(pageNumber > maxPageNumber || pageNumber < 1)
         {
-            faction = Simple_Factions.factionDatabase.getFactionDataByName(factionName);
+            player.sendMessage(YELLOW + "Invalid page number!");
+            return;
         }
-        
-        player.sendMessage("Members: ");
-        for (String member : faction.getMembers())
+
+        player.sendMessage(AQUA + "Members of " + faction.getName() + " - " + pageNumber + "/" + maxPageNumber);
+
+        if(!members.isEmpty())
         {
-            player.sendMessage(" -" + member);
+            members.remove(player.getDisplayName());
+
+            int endIndex = Math.min(9 * pageNumber, members.size());
+            int startIndex = 9 * (pageNumber - 1);
+            for(int i = startIndex; i < endIndex; i++)
+            {
+                player.sendMessage(AQUA + "- " + members.get(i));
+            }
         }
     }
 
     public static void owner(Player player, String factionName)
     {
-        if(Simple_Factions.playerDatabase.hasFaction(player) && factionName == null)
+        if(!Simple_Factions.playerDatabase.hasFaction(player) && factionName == null)
         {
             player.sendMessage(RED + "Command usage /faction owner [Faction name]");
             return;    
         }
-        
-        if(Simple_Factions.factionDatabase.factionExistsByName(factionName))
-        {
-            player.sendMessage(RED + "There is no faction with the name " + factionName);
-            return;
-        }
-    
+
         Faction faction;
-        
-        if(factionName == null)
+
+        if(factionName == null || factionName.isEmpty())
         {
-            int factionId = Simple_Factions.playerDatabase.getFactionId(player);
-            faction= Simple_Factions.factionDatabase.getFactionDataById(factionId);
+            if(Simple_Factions.playerDatabase.hasFaction(player))
+            {
+                int factionId = Simple_Factions.playerDatabase.getFactionId(player);
+                faction = Simple_Factions.factionDatabase.getFactionDataById(factionId);
+            }
+            else
+            {
+                player.sendMessage(RED + "There is no faction with the name " + factionName);
+                return;
+            }
         }
-        else 
+        else
         {
             faction = Simple_Factions.factionDatabase.getFactionDataByName(factionName);
         }

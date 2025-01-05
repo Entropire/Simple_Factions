@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static org.bukkit.ChatColor.RED;
 
 
 public class FactionCommand implements CommandExecutor, TabCompleter
@@ -65,7 +66,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
                 handleDeleteCommand(player);
                 break;
             case "list":
-                handleListCommand(player);
+                handleListCommand(player, args);
                 break;
             case "members":
                 handleMembersCommand(args, player);
@@ -117,17 +118,32 @@ public class FactionCommand implements CommandExecutor, TabCompleter
         FactionEditor.delete(player);
     }
 
-    private void handleListCommand(Player player)
+    private void handleListCommand(Player player, String[] args)
     {
-        FactionInfo.list(player);
+        int pageNumber = 1;
+        if(args.length > 1)
+        {
+            pageNumber = Integer.parseInt(args[1]);
+        }
+
+        FactionInfo.list(player, pageNumber);
     }
 
     private void handleMembersCommand(String[] args, Player player)
     {
-        String factionName = null;
-        if(args.length > 1) factionName = args[1];
+        if(args.length < 2)
+        {
+            player.sendMessage(RED + "Command usage /faction members [Faction name] [Page number]");
+            return;
+        }
 
-        FactionInfo.members(player, factionName);
+        int pageNumber = 1;
+        if(args.length > 2)
+        {
+            pageNumber = Integer.parseInt(args[2]);
+        }
+
+        FactionInfo.members(player, args[1], pageNumber);
     }
 
     private void  handleOwnerCommand(String[] args, Player player)
@@ -259,7 +275,7 @@ public class FactionCommand implements CommandExecutor, TabCompleter
                 suggestions.add("delete");
                 suggestions.add("list");
                 suggestions.add("owner");
-                suggestions.add("member");
+                suggestions.add("members");
                 suggestions.add("leave");
                 suggestions.add("kick");
                 suggestions.add("invite");

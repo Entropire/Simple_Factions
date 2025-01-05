@@ -15,20 +15,19 @@ FactionEditor - line 93
 | The owner of (factionName) is (ownerName)                                   | n/a                                                                            | /faction modify owner |
 
 ## [Waring] Yellow 
-| Waring message                                               | description                                            | preformed action                        |
-|:-------------------------------------------------------------|:-------------------------------------------------------|-----------------------------------------|
-| Invalid command!                                             | Wrong usage of the command /faction or /faction modify | /faction or /faction modify             |
-| Command usage: /chat [public or faction]                     | Wrong usage of the command /chat                       | /chat                                   |
-| Command usage /faction create [Faction name]                 | Wrong usage of the command /faction create             | /faction create                         |
-| Command usage /faction kick [Player name]                    | Wrong usage of the command /faction kick               | /faction kick                           |
-| Command usage /faction invite [Player name]                  | Wrong usage of the command /faction invite             | /faction invite                         |
-| Command usage /faction join [Faction name]                   | Wrong usage of the command /faction join               | /faction join                           |
-| Command usage /faction modify name [New faction name]        | Wrong usage of the command /faction modify name        | /faction modify name                    |
-| Command usage /faction modify name [Color name]              | Wrong usage of the command /faction modify color       | /faction modify color                   |
-| Command usage /faction modify owner [Member name]            | Wrong usage of the command /faction modify owner       | /faction modify owner                   |
-| Command usage /faction members [Faction name]                | Wrong usage of the command /faction members            | /faction members                        |
-| Command usage /faction owner [Faction name]                  | Wrong usage of the command /faction owner              | /faction owner                          |
-| There is no faction with the name [Faction name]             | No faction has been found with the name (factionName)  | /faction members or /faction owner      |
+| Waring message                                              | description                                            | preformed action                        |
+|:------------------------------------------------------------|:-------------------------------------------------------|-----------------------------------------|
+| Invalid command!                                            | Wrong usage of the command /faction or /faction modify | /faction or /faction modify             |
+| Command usage: /chat [public or faction]                    | Wrong usage of the command /chat                       | /chat                                   |
+| Command usage /faction create [Faction name]                | Wrong usage of the command /faction create             | /faction create                         |
+| Command usage /faction kick [Player name]                   | Wrong usage of the command /faction kick               | /faction kick                           |
+| Command usage /faction invite [Player name]                 | Wrong usage of the command /faction invite             | /faction invite                         |
+| Command usage /faction join [Faction name]                  | Wrong usage of the command /faction join               | /faction join                           |
+| Command usage /faction modify name [New faction name]       | Wrong usage of the command /faction modify name        | /faction modify name                    |
+| Command usage /faction modify name [Color name]             | Wrong usage of the command /faction modify color       | /faction modify color                   |
+| Command usage /faction modify owner [Member name]           | Wrong usage of the command /faction modify owner       | /faction modify owner                   |
+| Command usage /faction members [Faction name] [Page number] | Wrong usage of the command /faction members            | /faction members                        |
+| Command usage /faction owner [Faction name]                 | Wrong usage of the command /faction owner              | /faction owner                          |
 
 ## [Error] Red
 | Error message                                                | description                                                                                 |
@@ -44,6 +43,7 @@ FactionEditor - line 93
 | The name (factionName) is already in use by another faction! | Faction name is already in use by another faction                                           | *
 | (colorName) is not a valid color!                            | The supplied colorName is not a known color                                                 |
 | (chatType) Is not an valid chat type!                        | The supplied chat is not a valid chat type                                                  |
+| There is no faction with the name [Faction name]             | No faction has been found with the name (factionName)                                       |
 
 ### [Database Errors] //will do this one some other time 
 - Failed to connect to database: "Failed to connect to the dataBase: (errorMessage)"
