@@ -3,6 +3,7 @@ package me.entropire.simple_factions;
 import me.entropire.simple_factions.objects.Colors;
 import me.entropire.simple_factions.objects.Faction;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -19,6 +20,15 @@ public class FactionEditor
             player.sendMessage(RED + "You are already in a faction.");
             return;
         }
+
+        factionName = factionName.toLowerCase();
+
+        if(factionName.matches(".*[^a-zA-Z].*"))
+        {
+            player.sendMessage(ChatColor.RED + "Special characters are not allowed in an faction names!");
+            return;
+        }
+
         if(Simple_Factions.factionDatabase.factionExistsByName(factionName))
         {
             player.sendMessage(RED + "The name " + factionName + " is already in use by another faction!");
@@ -155,8 +165,6 @@ public class FactionEditor
 
     public static void modifyName(Player player, String newFactionName)
     {
-        newFactionName = newFactionName.toLowerCase();
-
         if(!Simple_Factions.playerDatabase.hasFaction(player))
         {
             player.sendMessage(RED + "You must be in a faction to preform this action!");
@@ -168,6 +176,14 @@ public class FactionEditor
         if(!factionData.getOwner().equals(player.getUniqueId()))
         {
             player.sendMessage(RED + "You must be the owner of the faction to preform this action!");
+            return;
+        }
+
+        newFactionName = newFactionName.toLowerCase();
+
+        if(newFactionName.matches(".*[^a-zA-Z].*"))
+        {
+            player.sendMessage(ChatColor.RED + "Special characters are not allowed in an faction names!");
             return;
         }
 

@@ -44,6 +44,7 @@ FactionEditor - line 93
 | (colorName) is not a valid color!                            | The supplied colorName is not a known color                                                 |
 | (chatType) Is not an valid chat type!                        | The supplied chat is not a valid chat type                                                  |
 | There is no faction with the name [Faction name]             | No faction has been found with the name (factionName)                                       |
+| Special characters are not allowed in faction names!         | New faction name contains special characters                                                |        
 
 ### [Database Errors] //will do this one some other time 
 - Failed to connect to database: "Failed to connect to the dataBase: (errorMessage)"

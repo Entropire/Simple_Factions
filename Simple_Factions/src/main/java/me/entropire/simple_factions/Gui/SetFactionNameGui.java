@@ -3,6 +3,7 @@ package me.entropire.simple_factions.Gui;
 import me.entropire.simple_factions.Simple_Factions;
 import me.entropire.simple_factions.objects.Faction;
 import net.wesjd.anvilgui.AnvilGUI;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -29,6 +30,12 @@ public class SetFactionNameGui extends BaseGui
                     }
 
                     String factionName = stateSnapshot.getText().toLowerCase();
+
+                    if(factionName.matches(".*[^a-zA-Z].*"))
+                    {
+                        player.sendMessage(ChatColor.RED + "Special characters are not allowed in an faction names!");
+                        return Arrays.asList(AnvilGUI.ResponseAction.replaceInputText(faction.getName()));
+                    }
 
                     if(stateSnapshot.getText().equalsIgnoreCase(faction.getName()))
                     {
