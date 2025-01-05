@@ -34,8 +34,14 @@ public class FactionCommand implements CommandExecutor, TabCompleter
             return false;
         }
 
-        if(args.length == 0)
+        if(args.length == 0 )
         {
+            if(!Simple_Factions.plugin.getSettingsConfig().getBoolean("enable-gui", true))
+            {
+                player.sendMessage(ChatColor.YELLOW + "Invalid command!");
+                return false;
+            }
+
             if(Simple_Factions.playerDatabase.hasFaction(player))
             {
                 int factionId = Simple_Factions.playerDatabase.getFactionId(player);
@@ -50,6 +56,8 @@ public class FactionCommand implements CommandExecutor, TabCompleter
 
             return false;
         }
+
+
 
         switch (args[0].toLowerCase())
         {

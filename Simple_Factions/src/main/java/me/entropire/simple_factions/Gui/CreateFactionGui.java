@@ -22,26 +22,7 @@ public class CreateFactionGui extends BaseGui
                         return Collections.emptyList();
                     }
 
-                    String factionName = stateSnapshot.getText().toLowerCase();
-
-                    if(factionName.matches(".*[^a-zA-Z].*"))
-                    {
-                        player.sendMessage(ChatColor.RED + "Special characters are not allowed in an faction names!");
-                        return Arrays.asList(AnvilGUI.ResponseAction.replaceInputText("faction"));
-                    }
-
-                    if(stateSnapshot.getText().equalsIgnoreCase("faction"))
-                    {
-                        return Arrays.asList(AnvilGUI.ResponseAction.replaceInputText("faction"));
-                    }
-
-                    if(Simple_Factions.factionDatabase.factionExistsByName(factionName))
-                    {
-                        player.sendMessage(RED + "the name " + factionName + " is already in use by another faction!");
-                        return Arrays.asList(AnvilGUI.ResponseAction.close());
-                    }
-
-                    FactionEditor.create(player, factionName);
+                    FactionEditor.create(player, stateSnapshot.getText());
                     return Arrays.asList(AnvilGUI.ResponseAction.close());
                 })
                 .text("faction")

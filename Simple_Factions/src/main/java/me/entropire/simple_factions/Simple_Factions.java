@@ -8,18 +8,27 @@ import me.entropire.simple_factions.database.PlayerDatabase;
 import me.entropire.simple_factions.events.Message;
 import me.entropire.simple_factions.events.OnInventoryClick;
 import me.entropire.simple_factions.events.OnJoin;
-import me.entropire.simple_factions.objects.Faction;
 import me.entropire.simple_factions.objects.Invite;
 import me.entropire.simple_factions.objects.Join;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public final class Simple_Factions extends JavaPlugin
 {
+    private File bannedWordsFile;
+    private FileConfiguration bannedWordsConfig;
+
+    private File settingsFile;
+    private FileConfiguration settingsConfig;
+
     public static Simple_Factions plugin;
 
     public static FactionDatabase factionDatabase;
@@ -31,6 +40,15 @@ public final class Simple_Factions extends JavaPlugin
     public void onEnable()
     {
         if(plugin == null) plugin = this;
+
+        //loads settings
+        createConfig("bannedNames.yml");
+        bannedWordsFile = new File(getDataFolder().getAbsolutePath(), "bannedNames.yml");
+        bannedWordsConfig = YamlConfiguration.loadConfiguration(bannedWordsFile);
+
+        createConfig("settings.yml");
+        settingsFile = new File(getDataFolder().getAbsolutePath(), "settings.yml");
+        settingsConfig = YamlConfiguration.loadConfiguration(settingsFile);
 
         //loads events
         this.getServer().getPluginManager().registerEvents(new OnJoin(), this);
@@ -71,5 +89,37 @@ public final class Simple_Factions extends JavaPlugin
     public void onDisable()
     {
         Bukkit.getServer().getConsoleSender().sendMessage("Simple_Factions disabled");
+    }
+
+    private void createConfig(String fileName) {
+        File file = new File(getDataFolder(), fileName);
+        if (!file.exists()) {
+            getDataFolder().mkdirs();
+            saveResource(fileName, false);
+        }
+    }
+
+    public FileConfiguration getBannedWordsConfig() {
+        return bannedWordsConfig;
+    }
+
+    public FileConfiguration getSettingsConfig() {
+        return settingsConfig;
+    }
+
+    public void saveBannedWordsConfig() {
+        try {
+            bannedWordsConfig.save(bannedWordsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveSettingsConfig() {
+        try {
+            settingsConfig.save(settingsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

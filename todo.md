@@ -6,7 +6,7 @@
 - land claiming
 
 [to do]
-- Remake/rethink the Create faction menu system
+- support for banned faction names
 
 [done]
 - when player gets kicked the player that is kicked does not get a message if they are online
@@ -26,6 +26,7 @@
 - with the /faction list make tabs that the player can go through
 - with the /faction members make tabs that the player can go through
 - Faction name cant have spaces, spacial characters, number and uppercase characters
+- Remake/rethink the Create faction menu system
 
 [not done but also not going to implement for now]
 - when request to join a faction if the owner is not online it sent an error instead of an owner not online

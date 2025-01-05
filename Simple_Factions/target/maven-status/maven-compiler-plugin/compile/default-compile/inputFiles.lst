@@ -2,7 +2,6 @@ D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simp
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\Gui\CreateFactionGui.java
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\database\PlayerDatabase.java
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\Gui\Button.java
-D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\Gui\SetFactionColorGui.java
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\FactionInfo.java
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\Simple_Factions.java
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\FactionEditor.java
@@ -16,7 +15,6 @@ D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simp
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\objects\Colors.java
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\events\OnJoin.java
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\Gui\Gui.java
-D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\Gui\SetFactionNameGui.java
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\objects\Join.java
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\Gui\FactionMembersListGui.java
 D:\Projects\Java\Simple_Factions\Simple_Factions\src\main\java\me\entropire\simple_factions\objects\Faction.java

@@ -29,6 +29,12 @@ public class FactionEditor
             return;
         }
 
+        if(Simple_Factions.plugin.getSettingsConfig().getBoolean("enable-bannedNames", true) && Simple_Factions.plugin.getBannedWordsConfig().getStringList("BannedNames").contains(factionName))
+        {
+            player.sendMessage(ChatColor.RED + "This name has been banned and cannot be used!");
+            return;
+        }
+
         if(Simple_Factions.factionDatabase.factionExistsByName(factionName))
         {
             player.sendMessage(RED + "The name " + factionName + " is already in use by another faction!");
@@ -170,6 +176,12 @@ public class FactionEditor
         if(newFactionName.matches(".*[^a-zA-Z].*"))
         {
             player.sendMessage(ChatColor.RED + "Special characters are not allowed in an faction names!");
+            return;
+        }
+
+        if(Simple_Factions.plugin.getSettingsConfig().getBoolean("enable-bannedNames", true) && Simple_Factions.plugin.getBannedWordsConfig().getStringList("BannedNames").contains(newFactionName))
+        {
+            player.sendMessage(ChatColor.RED + "This name has been banned and cannot be used!");
             return;
         }
 
