@@ -58,7 +58,7 @@ public class PlayerListGui extends BaseGui
                     (btn, event) -> {
                 String inventoryName = event.getView().getTitle().replace("Players - ", "");
                 int eventPageNumber = Integer.parseInt( inventoryName.split("/")[0]) + 1;
-                new FactionListGui(eventPageNumber).open(player);
+                new PlayerListGui(eventPageNumber).open(player);
             });
         }
         else
@@ -72,7 +72,7 @@ public class PlayerListGui extends BaseGui
                     (btn, event) -> {
                 String inventoryName = event.getView().getTitle().replace("Players - ", "");
                 int eventPageNumber = Integer.parseInt( inventoryName.split("/")[0]) - 1;
-                new FactionListGui(eventPageNumber).open(player);
+                new PlayerListGui(eventPageNumber).open(player);
             });
         }
         else

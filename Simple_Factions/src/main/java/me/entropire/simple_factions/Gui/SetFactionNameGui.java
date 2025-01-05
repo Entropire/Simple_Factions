@@ -28,7 +28,7 @@ public class SetFactionNameGui extends BaseGui
                         return Collections.emptyList();
                     }
 
-                    String factionName = faction.getName().toLowerCase();
+                    String factionName = stateSnapshot.getText().toLowerCase();
 
                     if(stateSnapshot.getText().equalsIgnoreCase(faction.getName()))
                     {
