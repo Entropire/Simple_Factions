@@ -26,38 +26,39 @@ public class ChatCommands implements CommandExecutor, TabCompleter
             return false;
         }
 
-        String chatType;
-
-        if(args.length < 1)
-        {
-            if(command.getName().equalsIgnoreCase("cp") || command.getName().equalsIgnoreCase("cf"))
-            {
-                chatType = command.getName().equalsIgnoreCase("cp") ? "public" : "faction";
-            }
-            else
-            {
-                player.sendMessage("Command usage: /chat [public or faction]");
-                return false;
-            }
-        }
-        else
-        {
-            chatType = args[0];
-        }
-
-        if(!chats.contains(chatType))
-        {
-            player.sendMessage(RED + chatType + " Is not an valid chat type!");
-        }
-
         if(!Simple_Factions.playerDatabase.hasFaction(player))
         {
             player.sendMessage(RED + "You must be in a faction to preform this action!");
             return false;
         }
-        Simple_Factions.playerDatabase.setChat(player.getUniqueId(), chatType);
-        player.sendMessage(AQUA + "Changed chat to " + chatType);
 
+        if(command.getName().equalsIgnoreCase("cf"))
+        {
+            Simple_Factions.playerDatabase.setChat(player.getUniqueId(), "faction");
+            player.sendMessage(AQUA + "Changed chat to faction");
+            return true;
+        }
+
+        if(command.getName().equalsIgnoreCase("cp"))
+        {
+            Simple_Factions.playerDatabase.setChat(player.getUniqueId(), "public");
+            player.sendMessage(AQUA + "Changed chat to public");
+            return true;
+        }
+
+        if(args.length < 1)
+        {
+            player.sendMessage("Command usage: /chat [public or faction]");
+            return false;
+        }
+
+        if(!chats.contains(args[0]))
+        {
+            player.sendMessage(RED + args[0] + " Is not an valid chat type!");
+        }
+
+        Simple_Factions.playerDatabase.setChat(player.getUniqueId(), args[0]);
+        player.sendMessage(AQUA + "Changed chat to " + args[0]);
         return false;
     }
 
@@ -66,7 +67,7 @@ public class ChatCommands implements CommandExecutor, TabCompleter
     {
         List<String> suggestions = new ArrayList<>();
 
-        if(sender instanceof Player)
+        if(sender instanceof Player && !command.getName().equalsIgnoreCase("cp") && !command.getName().equalsIgnoreCase("cf"))
         {
             if(args.length == 1)
             {
