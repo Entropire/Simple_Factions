@@ -29,7 +29,7 @@ public class ChangeFactionColorGui extends BaseGui
                 int factionId = Simple_Factions.playerDatabase.getFactionId((Player)event.getView().getPlayer());
                 faction  = Simple_Factions.factionDatabase.getFactionDataById(factionId);
 
-                new FactionGui(faction).open(player);
+                player.closeInventory();
             });
             i++;
         }
