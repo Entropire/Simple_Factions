@@ -200,7 +200,7 @@ public class FactionEditor
 
             if(member != null)
             {
-                changePlayerDisplayName(member, factionData.getColor() + "[" + factionData.getName() + "] " + player.getName());
+                changePlayerDisplayName(member, factionData.getColor() + "[" + factionData.getName() + "] " + member.getName());
             }
         }
     }
